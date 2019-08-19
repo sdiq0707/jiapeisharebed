@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+	 <classPathEntry location="D:\mysql-connector-java-5.0.8-bin.jar"/>
+  <context id="context1" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/jiapeisharebed" userId="root" password="123456" />
+    <javaModelGenerator targetPackage="com.woniu.entity" targetProject="jiapeisharebed" ></javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="jiapeisharebed" ></sqlMapGenerator>
+    <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="jiapeisharebed" type="XMLMAPPER" />
+    
+    <table schema="" tableName="administrative" ></table>
+    <table schema="" tableName="bed" ></table>
+    <table schema="" tableName="customer" ></table>
+    <table schema="" tableName="factory" ></table>
+    <table schema="" tableName="feedback" ></table>
+    <table schema="" tableName="fixer" ></table>
+    <table schema="" tableName="fixitem" ></table>
+    <table schema="" tableName="hospital" ></table>
+    <table schema="" tableName="hospitaladministrative" ></table>
+    <table schema="" tableName="hospitalmanger" ></table>
+    <table schema="" tableName="log" ></table>
+    <table schema="" tableName="orders" ></table>
+    <table schema="" tableName="photo" ></table>
+    <table schema="" tableName="role" ></table>
+    <table schema="" tableName="roletree" ></table>
+    <table schema="" tableName="scrap" ></table>
+    <table schema="" tableName="shareholder" ></table>
+    <table schema="" tableName="tree" ></table>
+    <table schema="" tableName="userinfo" ></table>
+    <table schema="" tableName="userinforole" ></table>
+    <table schema="" tableName="trouble" ></table>
+  </context>
+</generatorConfiguration>
