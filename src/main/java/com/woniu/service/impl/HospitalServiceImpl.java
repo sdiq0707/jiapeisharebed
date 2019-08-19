@@ -1,11 +1,16 @@
 package com.woniu.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Hospital;
 import com.woniu.mapper.HospitalMapper;
 import com.woniu.service.IHospitalService;
 
+@Service
 public class HospitalServiceImpl implements IHospitalService{
 
 	@Resource
@@ -24,19 +29,22 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	@Override
 	public void delete(Integer hid) {
-		
 		hospitalMapper.deleteByPrimaryKey(hid);
 	}
 
 	@Override
-	public void findAll() {
-		hospitalMapper.selectByExample(null);
+	public List<Hospital> findAll() {
+		System.out.println("111111111111111111111111111");
+		List<Hospital> list = hospitalMapper.selectByExample(null);
+		System.out.println(list);
+		return list;
 		
 	}
 
 	@Override
-	public void findOne(Integer hid) {
-		hospitalMapper.selectByPrimaryKey(hid);
+	public Hospital findOne(Integer hid) {
+		Hospital hospital = hospitalMapper.selectByPrimaryKey(hid);
+		return hospital;
 		
 	}
 
