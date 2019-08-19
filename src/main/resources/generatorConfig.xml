@@ -3,7 +3,7 @@
 <generatorConfiguration >
 	 <classPathEntry location="D:\mysql-connector-java-5.0.8-bin.jar"/>
   <context id="context1" >
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/jiapeisharebed" userId="root" password="123456" />
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.111.31.86:3306/prj1" userId="prj1" password="#@$*()#$" />
     <javaModelGenerator targetPackage="com.woniu.entity" targetProject="jiapeisharebed" ></javaModelGenerator>
     <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="jiapeisharebed" ></sqlMapGenerator>
     <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="jiapeisharebed" type="XMLMAPPER" />
