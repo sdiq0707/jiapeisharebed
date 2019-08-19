@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woniu.entity.Administrative;
 import com.woniu.service.IAdministrativeService;
 
-@RestController
+@Controller
 @RequestMapping("/admin/administrative")
 public class AdministrativeController {
 
@@ -20,8 +19,15 @@ public class AdministrativeController {
 	private IAdministrativeService administrativeServiceImpl;
 	
 	@RequestMapping("findAll")
-	public List<Administrative> findAll(ModelMap map){
+	public String findAll(ModelMap map){
 		List<Administrative> list = administrativeServiceImpl.findAll();
-		return list;
+		map.put("list", list);
+		return "/admin/administrative/list";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Integer aid) {
+		administrativeServiceImpl.delete(aid);
+		return "redirect:findAll";
 	}
 }

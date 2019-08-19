@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,36 +9,27 @@
 <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-<h3>科室详情</h3>
-	<table class="table table-bordered table-hover table-striped" >	
+<h4>科室详情</h4>
+	<table class="table table-bordered table-hover table-striped" >
 			<tr>
 				<td>aid</td>
 				<td>aname</td>
 				<td>isdelete</td>
+				<td>operation</td>
 			</tr>
 			
-			<tr v-for="administrative in json.list">
-				<td>{{administrative.aid}}</td>
-				<td>{{administrative.aname}}</td>
-				<td>{{administrative.isdelete}}</td>
-			</tr>
+			<c:forEach items="${list}" var="administrative">
+				<tr>
+						<td>${administrative.aid}</td>
+						<td>${administrative.aname}</td>
+						<td>${administrative.isdelete}</td>
+						<td>
+							编辑
+							|
+							<a href="delete?aid=${administrative.aid }">删除</a>
+						</td>
+				</tr>
+			</c:forEach>
 	</table>
-</div>	
 </body>
 </html>
-<script>
-	window.onload=function(){
-		var vm=new Vue({
-			el:'#app',
-			data:{
-				json:''
-			},
-			methods:{
-				method:'post',
-				emulateJSON:true,
-				url:'findAll'
-			}
-		});
-	}
-</script>
