@@ -12,31 +12,31 @@ public class HospitalServiceImpl implements IHospitalService{
 	private HospitalMapper hospitalMapper;
 	@Override
 	public void save(Hospital hospital) {
-		
+		hospitalMapper.insertSelective(hospital);
 		
 	}
 
 	@Override
 	public void update(Hospital hospital) {
-		// TODO Auto-generated method stub
+		hospitalMapper.updateByPrimaryKey(hospital);
 		
 	}
 
 	@Override
 	public void delete(Integer hid) {
-		// TODO Auto-generated method stub
 		
+		hospitalMapper.deleteByPrimaryKey(hid);
 	}
 
 	@Override
 	public void findAll() {
-		// TODO Auto-generated method stub
+		hospitalMapper.selectByExample(null);
 		
 	}
 
 	@Override
 	public void findOne(Integer hid) {
-		// TODO Auto-generated method stub
+		hospitalMapper.selectByPrimaryKey(hid);
 		
 	}
 
