@@ -15,7 +15,7 @@ spring:
 logging: 
   level: 
     com: 
-      lcc: 
+      woniu: 
         mapper: DEBUG
  
 mybatis: 
