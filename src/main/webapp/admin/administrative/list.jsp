@@ -17,7 +17,7 @@
 				<td>isdelete</td>
 			</tr>
 			
-			<tr v-for="log in json.list">
+			<tr v-for="administrative in json.list">
 				<td>{{administrative.aid}}</td>
 				<td>{{administrative.aname}}</td>
 				<td>{{administrative.isdelete}}</td>
@@ -26,3 +26,18 @@
 </div>	
 </body>
 </html>
+<script>
+	window.onload=function(){
+		var vm=new Vue({
+			el:'#app',
+			data:{
+				json:''
+			},
+			methods:{
+				method:'post',
+				emulateJSON:true,
+				url:'findAll'
+			}
+		});
+	}
+</script>
