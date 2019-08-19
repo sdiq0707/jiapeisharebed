@@ -34,9 +34,7 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	@Override
 	public List<Hospital> findAll() {
-		System.out.println("111111111111111111111111111");
 		List<Hospital> list = hospitalMapper.selectByExample(null);
-		System.out.println(list);
 		return list;
 		
 	}

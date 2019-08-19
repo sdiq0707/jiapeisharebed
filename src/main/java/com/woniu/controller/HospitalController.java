@@ -39,9 +39,7 @@ public class HospitalController {
 	
 	@RequestMapping("findAll")
 	public String findAll(ModelMap map) {
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		List<Hospital> list=hospitalService.findAll();
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		System.out.println(list);
 		map.put("list", list);
 		return "admin/hospital/list";
