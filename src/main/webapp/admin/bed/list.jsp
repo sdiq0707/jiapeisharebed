@@ -11,20 +11,6 @@
 <body>
 <table border="1" width="100%">
 <tr>
-	<td>${bed.bid }</td>
-	<td>${bed.fid }</td>
-	<td>${bed.uid }</td>
-	<td>${bed.bnum }</td>
-	<td>${bed.productor }</td>
-	<td>${bed.productorconnectname }</td>
-	<td>${bed.productorphone }</td>
-	<td>${bed.bstatus }</td>
-	<td>${bed.istrouble }</td>
-	<td>${bed.isdelete }</td>
-	<td>${bed.fkid }</td>
-</tr>
-<c:forEach items="${beds }" var="bed">
-<tr>
 	<td>bid</td>
 	<td>fid</td>
 	<td>uid</td>
@@ -36,6 +22,20 @@
 	<td>istrouble</td>
 	<td>isdelete</td>
 	<td>fkid</td>
+</tr>
+<c:forEach items="${beds }" var="bed">
+<tr>
+	<td>${bed.bid }</td>
+	<td>${bed.fid }</td>
+	<td>${bed.uid }</td>
+	<td>${bed.bnum }</td>
+	<td>${bed.productor }</td>
+	<td>${bed.productorconnectname }</td>
+	<td>${bed.productorphone }</td>
+	<td>${bed.bstatus }</td>
+	<td>${bed.istrouble }</td>
+	<td>${bed.isdelete }</td>
+	<td>${bed.fkid }</td>
 </tr>
 </c:forEach>
 </table>
