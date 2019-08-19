@@ -17,7 +17,5 @@ logging:
     com: 
       woniu: 
         mapper: DEBUG
- 
-mybatis: 
-  config-location: classpath:configuration.xml     
+   
 
