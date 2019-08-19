@@ -17,5 +17,4 @@ logging:
     com: 
       woniu: 
         mapper: DEBUG
-   
 
