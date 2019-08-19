@@ -1,0 +1,23 @@
+server: 
+  port: 1111 
+
+spring: 
+  mvc: 
+    view: 
+      prefix: /
+      suffix: .jsp 
+  datasource: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.111.31.86:3306/prj1?characterEncoding=utf-8
+    username: prj1
+    password: #@$*()#$
+     
+logging: 
+  level: 
+    com: 
+      lcc: 
+        mapper: DEBUG
+ 
+mybatis: 
+  config-location: classpath:configuration.xml     
+
