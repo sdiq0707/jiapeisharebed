@@ -17,11 +17,14 @@
 			
 			<TABLE border="1px" width="100%">
 				<TR>
-					<TD>logid</TD>
-					<TD>uid</TD>
-					<TD>action</TD>
-					<TD>actiontime</TD>
-					<TD>uname</TD>
+					<TD>手机号</TD>
+					<TD>昵称</TD>
+					<TD>性别</TD>
+					<TD>注册时间</TD>
+					<TD>订单总数</TD>
+					<TD>累计消费</TD>
+					<TD>下单医院</TD>
+					<TD>操作</TD>
 				</TR>
 				
 					<TR v-for="log in json.list">
