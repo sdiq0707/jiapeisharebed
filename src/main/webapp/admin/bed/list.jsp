@@ -9,6 +9,7 @@
 <title>床位管理</title>
 </head>
 <body>
+<a href="goInput">新增</a>
 <table border="1" width="100%">
 <tr>
 	<td>bid</td>
@@ -39,5 +40,6 @@
 </tr>
 </c:forEach>
 </table>
+
 </body>
 </html>
