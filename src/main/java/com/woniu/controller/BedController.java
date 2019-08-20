@@ -32,7 +32,29 @@ public class BedController {
 	}
 	@RequestMapping("save")
 	public String save(Bed bed) {
-		System.out.println(bed.getBid());
+		bedServiceImpl.save(bed);
+		return "redirect:findAll";
+	}
+	@RequestMapping("delete")
+	public String delete(Integer bid) {
+		bedServiceImpl.delete(bid);
+		return "redirect:findAll";
+	}
+	@RequestMapping("revoke")
+	public String revoke(Integer bid) {
+		bedServiceImpl.revoke(bid);
+		return "redirect:findAll";
+	}
+	@RequestMapping("findById")
+	public String findById(Integer bid,ModelMap map) {
+		Bed bed=bedServiceImpl.findById(bid);
+		map.put("bed", bed);
+		System.out.println(bed);
+		return "/admin/bed/update";
+	}
+	@RequestMapping("update")
+	public String update(Bed bed) {
+		bedServiceImpl.update(bed);
 		return "redirect:findAll";
 	}
 }

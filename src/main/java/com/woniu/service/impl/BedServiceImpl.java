@@ -20,9 +20,38 @@ public class BedServiceImpl implements IBedService {
 	}
 	@Override
 	public void save(Bed bed) {
-		System.out.println();
+		bed.setBstatus(true);
+		bed.setIsdelete(0);
+		bed.setIstrouble(false);
+		bedMapper.insertSelective(bed);
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void delete(Integer bid) {
+		// TODO Auto-generated method stub
+		Bed bed=bedMapper.selectByPrimaryKey(bid);
+		bed.setIsdelete(1);
+		bedMapper.updateByPrimaryKeySelective(bed);
+	}
+	@Override
+	public void revoke(Integer bid) {
+		// TODO Auto-generated method stub
+		Bed bed=bedMapper.selectByPrimaryKey(bid);
+		bed.setIsdelete(0);
+		bedMapper.updateByPrimaryKeySelective(bed);
+	}
+	@Override
+	public Bed findById(Integer bid) {
+		// TODO Auto-generated method stub
+		Bed bed=bedMapper.selectByPrimaryKey(bid);
+		return bed;
+	}
+	@Override
+	public void update(Bed bed) {
+		// TODO Auto-generated method stub
+		bedMapper.updateByPrimaryKey(bed);
+	}
+	
 
 }

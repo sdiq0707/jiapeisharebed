@@ -23,6 +23,7 @@
 	<td>istrouble</td>
 	<td>isdelete</td>
 	<td>fkid</td>
+	<td>编辑</td>
 </tr>
 <c:forEach items="${beds }" var="bed">
 <tr>
@@ -35,8 +36,9 @@
 	<td>${bed.productorphone }</td>
 	<td>${bed.bstatus }</td>
 	<td>${bed.istrouble }</td>
-	<td>${bed.isdelete }</td>
+	<td>${bed.isdelete==1? '已删除' : '正常'}</td>
 	<td>${bed.fkid }</td>
+	<td><a href="findById?bid=${bed.bid }">修改</a>|<a href="${bed.isdelete==1?'revoke':'delete' }?bid=${bed.bid }">${bed.isdelete==1?'恢复':'删除' }</a></td>
 </tr>
 </c:forEach>
 </table>
