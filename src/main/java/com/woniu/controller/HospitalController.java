@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.entity.Hospital;
+import com.woniu.entity.Role;
 import com.woniu.service.impl.HospitalServiceImpl;
 
 @Controller
@@ -24,30 +25,36 @@ public class HospitalController {
 	@RequestMapping("save")
 	public String  save(Hospital hospital) {
 		hospitalService.save(hospital);
-		return null;
+		return "redirect:findAll";
 		
 	}
 	
 	@RequestMapping("delete")
 	public String delete(Integer hid) {
 		hospitalService.delete(hid);
-		return null;
+		return "redirect:findAll";
 		
 	}
 	@RequestMapping("update")
 	public String update(Hospital hospital) {
 		hospitalService.update(hospital);
-		return null;
+		return "redirect:findAll";
+		
+	}
+	
+	@RequestMapping("goUpdate")
+	public String update(Integer hid,ModelMap map) {
+		Hospital hospital = hospitalService.findOne(hid);
+		map.put("hospital", hospital);
+		return "admin/hospital/update";
 		
 	}
 	
 	@RequestMapping("findAll")
-	public @ResponseBody Map<String,Object> findAll() {
-		List<Hospital> list=hospitalService.findAll();
-		Map<String,Object> map = new HashMap<String, Object>();
-		System.out.println(list);
-		map.put("list", list);
-		return map;
+	public String  findAll(ModelMap map) {
+		List<Hospital> hospitalList=hospitalService.findAll();
+		map.put("hospitalList", hospitalList);
+		return "admin/hospital/list";
 		
 	}
 	
@@ -56,6 +63,11 @@ public class HospitalController {
 		hospitalService.findOne(hid);
 		return null;
 		
+	}
+	@RequestMapping("goSave")
+	public String goInput(ModelMap map) {
+	
+		return "admin/hospital/save";
 	}
 
 }

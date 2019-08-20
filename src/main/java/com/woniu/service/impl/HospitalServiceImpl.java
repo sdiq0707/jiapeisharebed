@@ -23,6 +23,7 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	@Override
 	public void update(Hospital hospital) {
+		System.out.println(hospital);
 		hospitalMapper.updateByPrimaryKey(hospital);
 		
 	}
