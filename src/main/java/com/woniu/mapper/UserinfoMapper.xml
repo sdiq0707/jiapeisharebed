@@ -16,6 +16,9 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
   </resultMap>
+  <select id="findByUid" resultMap="BaseResultMap">
+  	select b.*,a.* from userinfo a,shareholder b where a.uid=b.uid and b.uid=${uid}
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

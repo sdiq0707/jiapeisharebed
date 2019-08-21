@@ -1,5 +1,6 @@
 package com.woniu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.entity.Bed;
+import com.woniu.entity.Shareholder;
+import com.woniu.entity.Userinfo;
 import com.woniu.service.IBedService;
+import com.woniu.service.IShareholderService;
 import com.woniu.service.impl.BedServiceImpl;
 
 @Controller
@@ -19,6 +23,8 @@ public class BedController {
 	
 	@Resource
 	private IBedService bedServiceImpl;
+	@Resource
+	private IShareholderService shareholderServiceImpl;
 	
 	@RequestMapping("findAll")
 	public String findAll(ModelMap map) {
@@ -27,7 +33,9 @@ public class BedController {
 		return "/admin/bed/list";
 	}
 	@RequestMapping("goInput")
-	public String goInput() {
+	public String goInput(ModelMap map) {
+		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
+		map.put("shareholders", shareholders);
 		return "/admin/bed/input";
 	}
 	@RequestMapping("save")
