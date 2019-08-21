@@ -1,15 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Hospital Management</title>
+<meta charset="utf-8">
+<title>医院管理</title>
 </head>
-	
 <body>
-	welcome to hospital management
-	${list }
+<table border="1" width="100%">
+<tr>
+	<td>hid</td>
+	<td>hname</td>
+	<td>province</td>
+	<td>city</td>
+	<td>zone</td>
+	<td>country</td>
+	<td>rent</td>
+	<td>account</td>
+	<td>isdelete</td>
+	<td>operation</td>
+</tr>
+<c:forEach items="${hospitalList }" var="hospital">
+<tr>
+	<td>${hospital.hid }</td>
+	<td>${hospital.hname }</td>
+	<td>${hospital.province }</td>
+	<td>${hospital.city }</td>
+	<td>${hospital.zone }</td>
+	<td>${hospital.country }</td>
+	<td>${hospital.rent }</td>
+	<td>${hospital.account }</td>
+	<td>${hospital.isdelete }</td>
+	<td>
+	<a href="delete?hid=${hospital.hid }">delete</a>
+	|
+	<a href="goUpdate?hid=${hospital.hid }">update</a>
+	</td>
+</tr>
+</c:forEach>
+</table>
+<button><a href="goSave">save<a></button>
 </body>
 </html>
