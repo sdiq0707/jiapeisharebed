@@ -13,6 +13,13 @@
     <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="findByUid" resultMap="BaseResultMap">
+  	SELECT * FROM tree t WHERE EXISTS (
+		SELECT r.tid FROM roletree r,userinforole u
+		WHERE r.rid=u.rid AND u.uid=#{uid} AND r.tid=t.tid)
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
