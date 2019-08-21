@@ -17,6 +17,11 @@
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  <select id="findByAid" resultMap="BaseResultMap">
+	SELECT * from administrative a where EXISTS(
+		SELECT aid from hospitaladministrative where hid=#{hid} and aid=a.aid
+	)
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

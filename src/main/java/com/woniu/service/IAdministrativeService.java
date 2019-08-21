@@ -6,9 +6,10 @@ import com.woniu.entity.Administrative;
 
 public interface IAdministrativeService {
 
-	public void save(Administrative administrative);
+	public void save(Administrative administrative,Integer[] opt);
+	public void revoke(Integer aid);
 	public void delete(Integer aid);
-	public void update(Administrative administrative);
+	public void update(Administrative administrative,Integer[] opt);
 	public Administrative findOne(Integer aid);
 	public List<Administrative> findAll();
 }
