@@ -20,6 +20,19 @@
     <result column="sumconsume" property="sumconsume" jdbcType="INTEGER" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+  <!-- 通过消费者带出用户的订单，订单带出床ID，床ID带出医院科室 -->
+  <select id="findById" resultMap="BaseResultMapWithOrders">
+  	select * from customer where cid=#{cid}
+  </select>
+  <resultMap id="BaseResultMapWithOrders" type="com.woniu.entity.Customer" >
+  	<collection property="orders" column="cid" select="com.woniu.mapper.OrdersMapper.findByCid" />
+  </resultMap>
+  
+  <!-- <resultMap id="BaseResultMapWithOrders" type="com.woniu.entity.Customer" >
+  	<collection property="orders" column="cid" select="com.woniu.mapper.OrdersMapper.findByCid"></collection>
+  </resultMap> -->
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

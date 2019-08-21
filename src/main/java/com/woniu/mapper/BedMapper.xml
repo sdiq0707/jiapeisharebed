@@ -19,6 +19,12 @@
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
     <result column="fkid" property="fkid" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="findByOid" resultMap="BaseResultMap">
+  	SELECT * from bed b WHERE EXISTS (
+		SELECT o.bid from orders o where o.oid=#{oid} AND b.bid=o.bid)
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

@@ -9,21 +9,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h4>用户管理/用户/用户编辑</h4>
+
+<h4>用户管理/用户/用户详情</h4>
 <hr>
 <h3>基本信息</h3>
-<form action="update" method="post">
+
 <input name="cid" type="hidden" value="${customer.cid }">
-手机号:<input type="text" name="phone" value="${customer.phone }">
-昵称:<input type="text" name="cnickname" value="${customer.cnickname }">
-性别:<input type="text" name="sex" value="${customer.sex }"><br>
+手机号:${customer.phone } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+昵称:${customer.cnickname } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+性别:${customer.sex }<br>
 注册时间:<f:formatDate value="${customer.regtime }" pattern="yyyy-MM-dd hh:mm:ss"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 订单总数:${customer.ordertimes}<br>
-累计消费:${customer.sumconsume }&nbsp;&nbsp;&nbsp;
-账户余额:${customer.balance }<br>
-<input type="submit" value="修改">
-<a href="findByIdDetail?cid=${customer.cid }">取消</a>
-</form>
+累计消费(元):￥${customer.sumconsume }&nbsp;&nbsp;&nbsp;
+账户余额(元):￥${customer.balance }<br>
+<a href="findById?cid=${customer.cid }">编辑资料</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="${customer.isdelete==1?'revoke':'delete' }?cid=${customer.cid }">${customer.isdelete==1?'恢复使用':'删除用户' }</a>
 
 <br><hr>
 
