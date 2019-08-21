@@ -10,16 +10,23 @@
 <body>
 <form action="save" method="post">
 <input type="hidden" name="bid">
-厂家编号:<input type="text" name="fid"><br>
+选择厂家:<c:forEach items="${factorys }" var="factory">
+			<input type="radio" name="fid" value="${factory.fid }">
+			${factory.fname }
+		</c:forEach><br>
 选择股东:<c:forEach items="${shareholders }" var="shareholder">
-			<input type="radio" name="chk" value="${shareholder.uid }">
+			<input type="radio" name="uid" value="${shareholder.uid }">
 			${shareholder.userinfo.uname }
 		</c:forEach><br>
 床位编号:<input type="text" name="bnum"><br>
-设备厂家名称:<input type="text" name="productor"><br>
 设备厂家联系人:<input type="text" name="productorconnectname"><br>
-厂家联系电话:<input type="text" name="productorphone"><br>
-医院科室编号:<input type="text" name="fkid"><br>
+选择医院：
+		<select>
+			<c:forEach items="${hospitals }" var="hospital">
+			<option value="hospital.hid">${hospital.hname }</option>
+			</c:forEach>
+		</select><br>
+选择科室：
 <input type="submit" value="save"><br>
 </form>
 </body>

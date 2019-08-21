@@ -16,6 +16,7 @@
     <result column="rent" property="rent" jdbcType="DOUBLE" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <collection property="administrative" column="hid" select="com.woniu.mapper.AdministrativeMapper.findByHid"></collection>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--

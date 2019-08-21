@@ -8,13 +8,8 @@ spring:
       suffix: .jsp 
   datasource: 
     driver-class-name: com.mysql.jdbc.Driver
-<<<<<<< HEAD
     url: jdbc:mysql://47.111.31.86/prj1?characterEncoding=utf-8
     username: prj1
-=======
-    url: jdbc:mysql://47.111.31.86:3306/prj1?characterEncoding=utf-8
-    username:  prj1
->>>>>>> branch 'master' of ssh://git@github.com/sdiq0707/jiapeisharebed.git
     password: '#@$*()#$'
      
 logging: 
