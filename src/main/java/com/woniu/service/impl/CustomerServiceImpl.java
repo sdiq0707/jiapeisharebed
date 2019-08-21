@@ -21,4 +21,19 @@ public class CustomerServiceImpl implements ICustomerService {
 		return list;
 	}
 
+	@Override
+	public void delete(Integer cid) {
+		customerMapper.deleteByPrimaryKey(cid);
+	}
+
+	@Override
+	public void update(Customer customer) {
+		customerMapper.updateByPrimaryKeySelective(customer);
+	}
+
+	@Override
+	public Customer findById(Integer cid) {
+		return customerMapper.selectByPrimaryKey(cid);
+	}
+
 }

@@ -15,10 +15,23 @@
     <result column="wechat" property="wechat" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
+    <collection property="roles" column="uid" select="com.woniu.mapper.RoleMapper.findByUid"></collection>
   </resultMap>
+<<<<<<< HEAD
   <select id="findByUid" resultMap="BaseResultMap">
   	select b.*,a.* from userinfo a,shareholder b where a.uid=b.uid and b.uid=${uid}
   </select>
+=======
+  
+  <resultMap id="BaseResultMapWithTree" type="com.woniu.entity.Userinfo" >
+  	<collection property="trees" column="uid" select="com.woniu.mapper.TreeMapper.findByUid"></collection>
+  </resultMap>
+   <!-- 查询出来用户带角色 带权限-->
+  <select id="login" resultMap="BaseResultMapWithTree">
+  	select * from userinfo where uname=#{uname} and upass=#{upass} and isdelete=0
+  </select>
+  
+>>>>>>> branch 'master' of ssh://git@github.com/sdiq0707/jiapeisharebed.git
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
