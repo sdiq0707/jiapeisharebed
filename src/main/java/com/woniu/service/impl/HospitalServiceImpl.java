@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Hospital;
+import com.woniu.entity.Province;
 import com.woniu.mapper.HospitalMapper;
+import com.woniu.mapper.ProvinceMapper;
 import com.woniu.service.IHospitalService;
 
 @Service
@@ -15,6 +17,7 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	@Resource
 	private HospitalMapper hospitalMapper;
+	
 	@Override
 	public void save(Hospital hospital) {
 		hospitalMapper.insertSelective(hospital);
@@ -24,7 +27,7 @@ public class HospitalServiceImpl implements IHospitalService{
 	@Override
 	public void update(Hospital hospital) {
 		System.out.println(hospital);
-		hospitalMapper.updateByPrimaryKey(hospital);
+		hospitalMapper.updateByPrimaryKeySelective(hospital);
 		
 	}
 
@@ -46,5 +49,7 @@ public class HospitalServiceImpl implements IHospitalService{
 		return hospital;
 		
 	}
+
+	
 
 }
