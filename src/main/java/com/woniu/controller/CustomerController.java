@@ -6,14 +6,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.entity.Customer;
 import com.woniu.service.ICustomerService;
 
-@RestController
+@Controller
 @RequestMapping("admin/customer")
 public class CustomerController {
 	@Resource
