@@ -29,6 +29,7 @@ public class LoginController {
 			String json = mapper.writeValueAsString(info.getTrees());
 			session.setAttribute("info", info);
 			session.setAttribute("json", json);
+		System.out.println(json);
 			return "redirect:/admin/index.jsp";
 		}
 	}
