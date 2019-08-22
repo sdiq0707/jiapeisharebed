@@ -41,13 +41,14 @@ public class BedController {
 		return "/admin/bed/list";
 	}
 	@RequestMapping("goInput")
-	public String goInput(ModelMap map) {
+	public String goInput(ModelMap map,Hospital hospital) {
 		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
 		map.put("shareholders", shareholders);
 		List<Factory> factorys=factoryServiceImpl.findAll();
 		map.put("factorys", factorys);
 		List<Hospital> hospitals=hospitalServiceImpl.findAll();
 		map.put("hospitals", hospitals);
+		System.out.println(hospital.getHid());
 		return "/admin/bed/input";
 	}
 	@RequestMapping("save")

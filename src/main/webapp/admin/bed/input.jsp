@@ -21,9 +21,9 @@
 床位编号:<input type="text" name="bnum"><br>
 设备厂家联系人:<input type="text" name="productorconnectname"><br>
 选择医院：
-		<select>
+		<select name="hid">
 			<c:forEach items="${hospitals }" var="hospital">
-			<option value="hospital.hid">${hospital.hname }</option>
+			<option value="${hospital.hid }" >${hospital.hname }</option>
 			</c:forEach>
 		</select><br>
 选择科室：
