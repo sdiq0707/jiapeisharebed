@@ -1,6 +1,13 @@
 package com.woniu.entity;
 
 public class Bed {
+	@Override
+	public String toString() {
+		return "Bed [factory=" + factory + ", bid=" + bid + ", fid=" + fid + ", uid=" + uid + ", bnum=" + bnum
+				+ ", productorconnectname=" + productorconnectname + ", bstatus=" + bstatus + ", istrouble=" + istrouble
+				+ ", isdelete=" + isdelete + ", fkid=" + fkid + "]";
+	}
+
 	private Factory factory;
 	
 	public Factory getFactory() {

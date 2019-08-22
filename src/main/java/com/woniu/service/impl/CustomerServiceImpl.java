@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Customer;
+import com.woniu.entity.CustomerExample;
+import com.woniu.entity.CustomerExample.Criteria;
 import com.woniu.mapper.CustomerMapper;
 import com.woniu.service.ICustomerService;
 
@@ -16,8 +18,21 @@ public class CustomerServiceImpl implements ICustomerService {
 	private CustomerMapper customerMapper;
 	
 	@Override
-	public List<Customer> findAll() {
-		List<Customer> list = customerMapper.selectByExample(null);
+	public List<Customer> findAll(Customer customer) {
+		CustomerExample example = new CustomerExample();
+		Criteria c = example.createCriteria();
+		if(customer.getPhone()!=null && !customer.getPhone().equals("")) {
+			c.andPhoneEqualTo(customer.getPhone());
+		}
+		if(customer.getSex()!=null && !customer.getSex().equals("")) {
+			c.andSexEqualTo(customer.getSex());
+		}
+		if(customer.getRegtime()!=null && !customer.getRegtime().equals("")) {
+			c.andRegtimeEqualTo(customer.getRegtime());
+		}
+		
+		List<Customer> list = customerMapper.selectByExample(example);
+		
 		return list;
 	}
 
@@ -43,6 +58,22 @@ public class CustomerServiceImpl implements ICustomerService {
 		Customer customer = customerMapper.selectByPrimaryKey(cid);
 		customer.setIsdelete(0);
 		customerMapper.updateByPrimaryKeySelective(customer);
+	}
+
+	@Override
+	public Integer findAllCount(Customer customer) {
+		CustomerExample example = new CustomerExample();
+		Criteria c = example.createCriteria();
+		if(customer.getPhone()!=null && !customer.getPhone().equals("")) {
+			c.andPhoneEqualTo(customer.getPhone());
+		}
+		if(customer.getSex()!=null && !customer.getSex().equals("")) {
+			c.andSexEqualTo(customer.getSex());
+		}
+		if(customer.getRegtime()!=null && !customer.getRegtime().equals("")) {
+			c.andRegtimeEqualTo(customer.getRegtime());
+		}
+		return customerMapper.countByExample(example);//查找用户总数
 	}
 
 }
