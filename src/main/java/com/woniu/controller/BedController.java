@@ -8,8 +8,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.woniu.entity.Administrative;
 import com.woniu.entity.Bed;
 import com.woniu.entity.Factory;
 import com.woniu.entity.Hospital;
@@ -41,18 +45,22 @@ public class BedController {
 		return "/admin/bed/list";
 	}
 	@RequestMapping("goInput")
-	public String goInput(ModelMap map,Hospital hospital) {
+	public String oInput(ModelMap map) throws JsonProcessingException {
 		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
 		map.put("shareholders", shareholders);
 		List<Factory> factorys=factoryServiceImpl.findAll();
 		map.put("factorys", factorys);
-		List<Hospital> hospitals=hospitalServiceImpl.findAll();
-		map.put("hospitals", hospitals);
-		System.out.println(hospital.getHid());
+//		ObjectMapper objectMapper=new ObjectMapper();
+//		List<Hospital> list=hospitalServiceImpl.findAll();
+//		String hospitals=objectMapper.writeValueAsString(list);
+//		map.put("hospitals", hospitals);
 		return "/admin/bed/input";
 	}
 	@RequestMapping("save")
-	public String save(Bed bed) {
+	public String save(Bed bed,Hospital hospital,Administrative administrative) {
+		String hos=hospital.getHid().toString();
+		String adm=administrative.getAid().toString();
+		bed.setFkid(hos+"X"+adm);
 		bedServiceImpl.save(bed);
 		return "redirect:findAll";
 	}
@@ -77,5 +85,10 @@ public class BedController {
 	public String update(Bed bed) {
 		bedServiceImpl.update(bed);
 		return "redirect:findAll";
+	}
+	@RequestMapping("findHospital")
+	public @ResponseBody List findHospital() {
+		List list=hospitalServiceImpl.findAll();
+		return list;
 	}
 }
