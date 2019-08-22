@@ -38,7 +38,7 @@
 	${hospital.isdelete==1?'恢复':'删除' }
 	</a>
 	|
-	<a href="goUpdate?hid=${hospital.hid }">update</a>
+	<a href="goUpdate?hid=${hospital.hid }">修改</a>
 	</td>
 </tr>
 </c:forEach>
