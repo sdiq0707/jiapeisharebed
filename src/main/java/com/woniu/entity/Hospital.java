@@ -5,7 +5,16 @@ import java.util.List;
 public class Hospital {
 	
 	private List<Administrative> administrative;
-    @Override
+	
+    public List<Administrative> getAdministrative() {
+		return administrative;
+	}
+
+	public void setAdministrative(List<Administrative> administrative) {
+		this.administrative = administrative;
+	}
+
+	@Override
 	public String toString() {
 		return "Hospital [hid=" + hid + ", hname=" + hname + ", province=" + province + ", city=" + city + ", zone="
 				+ zone + ", country=" + country + ", rent=" + rent + ", account=" + account + ", isdelete=" + isdelete
