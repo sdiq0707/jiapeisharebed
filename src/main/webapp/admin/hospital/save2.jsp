@@ -4,18 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>修改医院</title>
+<title>增加医院</title>
 </head>
 <body>
-<form action="update" method="post">
-           <input type="hidden" name="hname" value="${hospital.hid }" /><br/>
-	医院名称：<input type="text" name="hname" value="${hospital.hname }" /><br/>
+<form action="save" method="post">
+	医院名称：<input type="text" name="hname" /><br/>
 	<div id="app">
-	所属省份：<SELECT id="p" NAME="province"  v-on:change="fillC($event.target.selectedIndex)" >
+	所属省份：<SELECT id="p" NAME="province" v-on:change="fillC($event.target.selectedIndex)" >
 			<option  v-for="p in json">{{p.pname}}</option>
 			</SELECT>
 						
@@ -26,11 +26,11 @@
 			<option v-for="z in zones">{{z.zname}}</option>
 			</SELECT>
 	</div>
-	所属县：<input type="text" name="country" value="${hospital.country }"/><br/>
-	医院租金：<input type="text" name="rent" value="${hospital.rent }"/><br/>
-	医院账户：<input type="text" name="account" value="${hospital.account }" /><br/>
-	软删除：<input type="text" name=isdelete value="${hospital.isdelete }" /><br/>
-<button type="submit">update</button><br/>
+	所属县：<input type="text" name="country" /><br/>
+	医院租金：<input type="text" name="rent" /><br/>
+	医院账户：<input type="text" name="account" /><br/>
+	软删除：<input type="text" name=isdelete /><br/>
+<button type="submit">save</button><br/>
 </form>
 </body>
 </html>

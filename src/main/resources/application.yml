@@ -8,7 +8,7 @@ spring:
       suffix: .jsp 
   datasource: 
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.111.31.86/prj1?characterEncoding=utf-8
+    url: jdbc:mysql://47.111.31.86:3306/prj1?characterEncoding=utf-8
     username: prj1
     password: '#@$*()#$'
      
