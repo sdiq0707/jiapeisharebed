@@ -17,7 +17,11 @@
     <result column="pid" property="pid" jdbcType="INTEGER" />
     <collection property="roles" column="uid" select="com.woniu.mapper.RoleMapper.findByUid"></collection>
   </resultMap>
-  
+
+  <select id="findByUid" resultMap="BaseResultMap">
+  	select b.*,a.* from userinfo a,shareholder b where a.uid=b.uid and b.uid=${uid}
+  </select>
+
   <resultMap id="BaseResultMapWithTree" type="com.woniu.entity.Userinfo" >
   	<collection property="trees" column="uid" select="com.woniu.mapper.TreeMapper.findByUid"></collection>
   </resultMap>

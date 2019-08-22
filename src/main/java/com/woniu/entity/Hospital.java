@@ -1,6 +1,10 @@
 package com.woniu.entity;
 
+import java.util.List;
+
 public class Hospital {
+	
+	private List<Administrative> administrative;
     @Override
 	public String toString() {
 		return "Hospital [hid=" + hid + ", hname=" + hname + ", province=" + province + ", city=" + city + ", zone="

@@ -31,9 +31,9 @@
 	<td>${bed.fid }</td>
 	<td>${bed.uid }</td>
 	<td>${bed.bnum }</td>
-	<td>${bed.productor }</td>
+	<td>${bed.factory.fname }</td>
 	<td>${bed.productorconnectname }</td>
-	<td>${bed.productorphone }</td>
+	<td>${bed.factory.phone }</td>
 	<td>${bed.bstatus }</td>
 	<td>${bed.istrouble }</td>
 	<td>${bed.isdelete==1? '已删除' : '正常'}</td>
