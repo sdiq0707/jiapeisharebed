@@ -78,7 +78,14 @@ public class BedController {
 	public String findById(Integer bid,ModelMap map) {
 		Bed bed=bedServiceImpl.findById(bid);
 		map.put("bed", bed);
-		System.out.println(bed);
+		String hosAdm=bed.getFkid();
+		String [] hosAdmArr=hosAdm.split("X");
+		map.put("hos", Integer.parseInt(hosAdmArr[0]));//医院ID
+		map.put("adm", Integer.parseInt(hosAdmArr[1]));//科室ID
+		List<Factory> factorys=factoryServiceImpl.findAll();
+		map.put("factorys", factorys);
+		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
+		map.put("shareholders", shareholders);
 		return "/admin/bed/update";
 	}
 	@RequestMapping("update")

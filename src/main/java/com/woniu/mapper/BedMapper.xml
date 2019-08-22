@@ -16,7 +16,7 @@
     <result column="istrouble" jdbcType="BIT" property="istrouble" />
     <result column="isdelete" jdbcType="INTEGER" property="isdelete" />
     <result column="fkid" jdbcType="VARCHAR" property="fkid" />
-    <collection property="factory" column="fid" select="com.woniu.mapper.FactoryMapper.findById"></collection>
+    <collection property="factory" column="bid" select="com.woniu.mapper.FactoryMapper.findById"></collection>
   </resultMap>
   <select id="findByOid" resultMap="BaseResultMap">
   	SELECT * from bed b WHERE EXISTS (

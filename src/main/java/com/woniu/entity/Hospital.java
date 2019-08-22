@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Hospital {
 	
-	private List<Administrative> administrative;
+	private List administrative;
 	
-    public List<Administrative> getAdministrative() {
+    public List getAdministrative() {
 		return administrative;
 	}
 
-	public void setAdministrative(List<Administrative> administrative) {
+	public void setAdministrative(List administrative) {
 		this.administrative = administrative;
 	}
 
