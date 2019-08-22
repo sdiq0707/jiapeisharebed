@@ -86,7 +86,7 @@
 				<th>
 				<a href="findById?oid=${orders.oid }">详情</a>
 				|
-				删除
+				<a href="deleteById?oid=${orders.oid }">删除</a>
 				</th>
 			</tr>
 		</c:forEach>
