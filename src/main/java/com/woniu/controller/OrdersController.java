@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.woniu.entity.Bed;
 import com.woniu.entity.OrderSelect;
 import com.woniu.entity.Orders;
 import com.woniu.service.IOrdersService;
@@ -23,13 +24,14 @@ public class OrdersController {
 	public String findAll(ModelMap map ,OrderSelect orderSelect) {
 		System.out.println(orderSelect.toString());
 		List<Orders> list = ordersServiceImpl.findAll(orderSelect);
-		map.put("list", list);
-		
+		map.put("list", list);		
 		return "admin/orders/list";
 	}
 	@RequestMapping("findById")
 	public String findByOid(ModelMap map , Integer oid) {
 		Orders orders = ordersServiceImpl.findById(oid);
+		Bed bed = orders.getBed();
+		map.put("bed", bed);
 		map.put("orders", orders);
 		return "admin/orders/details";
 	}
