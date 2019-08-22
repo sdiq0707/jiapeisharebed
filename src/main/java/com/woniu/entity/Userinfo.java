@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Userinfo {
 	private List<Role> roles;
-	
 	public List<Role> getRoles() {
 		return roles;
 	}

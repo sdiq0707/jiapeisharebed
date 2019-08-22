@@ -23,7 +23,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public void delete(Integer cid) {
-		customerMapper.deleteByPrimaryKey(cid);
+		Customer customer = customerMapper.selectByPrimaryKey(cid);
+		customer.setIsdelete(1);
+		customerMapper.updateByPrimaryKeySelective(customer);
 	}
 
 	@Override
@@ -33,7 +35,14 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public Customer findById(Integer cid) {
-		return customerMapper.selectByPrimaryKey(cid);
+		return customerMapper.findById(cid);
+	}
+
+	@Override
+	public void revoke(Integer cid) {
+		Customer customer = customerMapper.selectByPrimaryKey(cid);
+		customer.setIsdelete(0);
+		customerMapper.updateByPrimaryKeySelective(customer);
 	}
 
 }

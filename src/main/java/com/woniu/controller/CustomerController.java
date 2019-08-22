@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.woniu.entity.Customer;
+import com.woniu.entity.Orders;
 import com.woniu.service.ICustomerService;
 
 @Controller
@@ -29,6 +30,11 @@ public class CustomerController {
 		customerServiceImpl.delete(cid);
 		return "redirect:findAll";
 	}
+	@RequestMapping("revoke")
+	public String revoke(Integer cid) {
+		customerServiceImpl.revoke(cid);
+		return "redirect:findAll";
+	}
 	@RequestMapping("findByIdDetail")
 	public String findByIdDetail(Integer cid,ModelMap map) {
 		Customer customer=customerServiceImpl.findById(cid);
@@ -44,7 +50,7 @@ public class CustomerController {
 	@RequestMapping("update")
 	public String update(Customer customer) {
 		customerServiceImpl.update(customer);
-		return "redirect:findByIdDetail";
+		return "forward:findByIdDetail";
 	}
 
 }
