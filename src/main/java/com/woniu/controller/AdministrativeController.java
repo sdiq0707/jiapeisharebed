@@ -64,4 +64,4 @@ public class AdministrativeController {
 		map.put("hospitals", hospitals);
 		return "/admin/administrative/save";
 	}
-}
+} 

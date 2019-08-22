@@ -39,6 +39,6 @@ $(document).ready(function(){
 						</td>
 				</tr>
 			</c:forEach>
-	</table>
+	</table> 
 </body>
 </html>
