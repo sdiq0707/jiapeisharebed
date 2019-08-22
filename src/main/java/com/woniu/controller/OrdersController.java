@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.woniu.entity.OrderSelect;
@@ -26,5 +27,10 @@ public class OrdersController {
 		
 		return "admin/orders/list";
 	}
-
+	@RequestMapping("findById")
+	public String findByOid(ModelMap map , Integer oid) {
+		Orders orders = ordersServiceImpl.findById(oid);
+		map.put("orders", orders);
+		return "admin/orders/details";
+	}
 }

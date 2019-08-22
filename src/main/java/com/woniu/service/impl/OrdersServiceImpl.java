@@ -87,4 +87,10 @@ public class OrdersServiceImpl implements IOrdersService {
 		ordersMapper.updateByPrimaryKey(order);
 	}
 
+	@Override
+	public Orders findById(Integer oid) {
+		// TODO Auto-generated method stub
+		return ordersMapper.selectByPrimaryKey(oid);
+	}
+
 }
