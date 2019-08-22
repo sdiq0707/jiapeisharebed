@@ -6,4 +6,8 @@ import com.woniu.entity.Customer;
 
 public interface ICustomerService {
 	List<Customer> findAll();
+	void delete(Integer cid);
+	void revoke(Integer cid);
+	void update(Customer customer);
+	Customer findById(Integer cid);
 }

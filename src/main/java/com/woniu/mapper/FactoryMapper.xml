@@ -12,6 +12,9 @@
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="findById" resultMap="BaseResultMap">
+  	select a.* from factory a,bed b where a.fid=b.fid and b.bid=${bid};
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

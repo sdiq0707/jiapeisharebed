@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.entity.Hospital;
+import com.woniu.entity.Province;
 import com.woniu.entity.Role;
 import com.woniu.service.impl.HospitalServiceImpl;
+import com.woniu.service.impl.ProvinceServiceImpl;
 
 @Controller
 @RequestMapping("admin/hospital")
 public class HospitalController {
 	@Resource
 	private HospitalServiceImpl hospitalService;
+	@Resource
+	private ProvinceServiceImpl provinceService;
 	
 	@RequestMapping("save")
 	public String  save(Hospital hospital) {
@@ -31,10 +35,22 @@ public class HospitalController {
 	
 	@RequestMapping("delete")
 	public String delete(Integer hid) {
-		hospitalService.delete(hid);
+		Hospital hospital = hospitalService.findOne(hid);
+		System.out.println(hospital);
+		hospital.setIsdelete(1);
+		hospitalService.update(hospital);
 		return "redirect:findAll";
 		
 	}
+	@RequestMapping("revoke")
+	public String revoke(Integer hid) {
+		Hospital hospital = hospitalService.findOne(hid);
+		hospital.setIsdelete(0);
+		hospitalService.update(hospital);
+		return "redirect:findAll";
+		
+	}
+	
 	@RequestMapping("update")
 	public String update(Hospital hospital) {
 		hospitalService.update(hospital);
@@ -54,7 +70,7 @@ public class HospitalController {
 	public String  findAll(ModelMap map) {
 		List<Hospital> hospitalList=hospitalService.findAll();
 		map.put("hospitalList", hospitalList);
-		return "admin/hospital/list";
+		return "admin/hospital/hospitalList";
 		
 	}
 	
@@ -67,7 +83,12 @@ public class HospitalController {
 	@RequestMapping("goSave")
 	public String goInput(ModelMap map) {
 	
-		return "admin/hospital/save";
+		return "admin/hospital/save2";
 	}
 
+	@RequestMapping("findProvince")
+	public @ResponseBody List findProvince() throws Exception {
+		List<Province> list = provinceService.findAll();
+		return list ;
+	}
 }

@@ -1,111 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<meta charset="utf-8">
+<title>用户管理</title>
 </head>
 <body>
 	<div id="app">
-	<h3>用户管理/用户</h3>
-			uname<INPUT TYPE="text" NAME="uname" v-model="uname">
-			action<INPUT TYPE="text" v-model="action" NAME="action">
-			<input type="button" @click="get()" value="Query">
+			<h4>用户管理/用户</h4>
+			手机号<INPUT TYPE="text" NAME="phone">
+			性别<INPUT TYPE="text" NAME="sex">
+			注册日期<INPUT TYPE="text"NAME="regtime">
+			<input type="button" value="Query">
 			
 			<TABLE border="1px" width="100%">
+				<tr>
+					<td><button>导出报表</button> 用户总数：10000</td>
+				</tr>
 				<TR>
-					<TD>logid</TD>
-					<TD>uid</TD>
-					<TD>action</TD>
-					<TD>actiontime</TD>
-					<TD>uname</TD>
+					<TD>手机号</TD>
+					<TD>昵称</TD>
+					<TD>性别</TD>
+					<TD>注册时间</TD>
+					<TD>订单总数</TD>
+					<TD>累计消费(元)</TD>
+					<TD>账号余额(元)</TD>
+					<TD>状态</TD>
+					<TD>操作</TD>
 				</TR>
 				
-					<TR v-for="log in json.list">
-						<TD>{{log.logid}}</TD>
-						<TD>{{log.uid}}</TD>
-						<TD>{{log.action}}</TD>
-						<TD>{{log.actiontime}}</TD>
-						<TD>{{log.uname}}</TD>
+				<c:forEach items="${list}" var="customer">
+					<TR>
+						<TD>${customer.phone}</TD>
+						<TD>${customer.cnickname}</TD>
+						<TD>${customer.sex}</TD>
+						<TD>
+							<f:formatDate value="${customer.regtime}"
+								pattern="yyyy-MM-dd hh:mm:ss" />
+						</TD>
+						<TD>${customer.ordertimes}</TD>
+						<TD>￥${customer.sumconsume}</TD>
+						<TD>￥${customer.balance}</TD>
+						<TD>${customer.isdelete==1? '不可用' : '正常'}</TD>
+						<TD>
+							<a href="findByIdDetail?cid=${customer.cid }">详情</a>   
+							<a href="${customer.isdelete==1?'revoke':'delete' }?cid=${customer.cid }">${customer.isdelete==1?'恢复':'删除' }</a>
+						</TD>
 					</TR>
-			</TABLE>
-			<TABLE border="1" width="100%">
-				<TR>
-					<TD><button @click="first()">First</button></TD>
-					<TD><button @click="next()">Next</button></TD>
-					<TD><button @click="before()">Before</button></TD>
-					<TD><button @click="end()">End</button></TD>
-					<TD>第<INPUT TYPE="text" NAME="pageNow" id="pageNow"
-						v-model="pageNow" size="1">页 
-						每页<INPUT TYPE="text" NAME="limit" v-model="limit" size="1">条 
-						{{json.page.pageNow}}/{{json.page.pageCount}}
-						共{{json.page.count}}条
-						<input type="button" @click="get()" value="go"></TD>
-				</TR>
+				</c:forEach>
 			</TABLE>
 	</div>
 </body>
 </html>
-<script>
-	window.onload = function(){
-	    var vm = new Vue({
-	        el:'#app',
-	        data:{
-	            json:'',
-	            pageNow:1,
-	            limit:10,
-	            uname:'',
-	            action:''
-	        },
-	        mounted:function(){
-	        	this.get();
-	        },
-	        methods:{
-	            get:function(){
-	            	this.$http({
-	                	method:'post',
-	                	url:'findJSON',
-	                	emulateJSON:true, 
-	                	params:{
-	                		pageNow:this.pageNow,
-	                		limit:this.limit,
-	                		uname:this.uname,
-	                		action:this.action
-	                	},	
-	                }).then(function(res){
-	                	 this.json=res.body;
-	                },function(){
-	                    console.log('请求失败处理');
-	                });
-	            },
-	            first:function(){
-	            	this.pageNow = 1;
-	            	this.get();
-	            },
-	            next:function(){
-		            if(parseInt(this.pageNow)>=this.json.page.pageCount){
-	            		this.pageNow = this.json.page.pageCount;
-			        }else {
-			        	this.pageNow = parseInt(this.pageNow)+1;
-				    }
-	            	this.get();
-	            },
-	            before:function(){
-	            	if(parseInt(this.pageNow)<=1){
-	            		this.pageNow = 1;
-			        }else {
-			        	this.pageNow = parseInt(this.pageNow)-1;
-				    }
-	            	this.get();
-	            },
-	            end:function(){
-	            	this.pageNow = this.json.page.pageCount;
-	            	this.get();
-	            }
-	        }
-	    });
-	}
-</script>

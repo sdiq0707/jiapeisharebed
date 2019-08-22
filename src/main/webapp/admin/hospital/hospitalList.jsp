@@ -32,9 +32,11 @@
 	<td>${hospital.country }</td>
 	<td>${hospital.rent }</td>
 	<td>${hospital.account }</td>
-	<td>${hospital.isdelete }</td>
+	<td>${hospital.isdelete==0?'正常':'已删除' }</td>
 	<td>
-	<a href="delete?hid=${hospital.hid }">delete</a>
+	<a href="${hospital.isdelete==1?'revoke':'delete' }?hid=${hospital.hid }">
+	${hospital.isdelete==1?'恢复':'删除' }
+	</a>
 	|
 	<a href="goUpdate?hid=${hospital.hid }">update</a>
 	</td>
