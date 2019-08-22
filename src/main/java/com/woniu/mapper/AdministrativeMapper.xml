@@ -12,15 +12,11 @@
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   	<collection property="hospitals" column="aid" select="com.woniu.mapper.HospitalMapper.findByAid"></collection>
   </resultMap>
-<<<<<<< HEAD
-  
-=======
   <select id="findByHid" resultMap="BaseResultMap">
   	SELECT * from administrative where aid in(
 	SELECT hospitaladministrative.aid from hospitaladministrative WHERE hid=${hid} and administrative.aid=hospitaladministrative.aid
 )
   </select>
->>>>>>> branch 'master' of git@github.com:sdiq0707/jiapeisharebed.git
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
