@@ -83,7 +83,11 @@
 				<th>${orders.cid}</th>
 				<!--订单状态-->
 				<th>${orders.orderstatus}</th>				
-				<th>详情|删除</th>
+				<th>
+				<a href="findById?oid=${orders.oid }">详情</a>
+				|
+				删除
+				</th>
 			</tr>
 		</c:forEach>
 		</tbody>
