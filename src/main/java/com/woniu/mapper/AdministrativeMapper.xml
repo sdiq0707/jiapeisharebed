@@ -11,6 +11,11 @@
     <result column="aname" property="aname" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  <select id="findByHid" resultMap="BaseResultMap">
+  	SELECT * from administrative where aid in(
+	SELECT hospitaladministrative.aid from hospitaladministrative WHERE hid=${hid} and administrative.aid=hospitaladministrative.aid
+)
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
