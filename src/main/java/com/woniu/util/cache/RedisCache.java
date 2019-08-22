@@ -45,7 +45,6 @@ public class RedisCache implements Cache{
 		}
 		
 	}
-
 	@Override
 	public Object getObject(Object key) {
 		// TODO Auto-generated method stub
@@ -78,7 +77,6 @@ public class RedisCache implements Cache{
 			return null;
 		}
 	}
-
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
