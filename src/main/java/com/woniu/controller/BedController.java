@@ -42,6 +42,10 @@ public class BedController {
 	public String findAll(ModelMap map) {
 		List beds=bedServiceImpl.findAll();
 		map.put("beds", beds);
+		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
+		map.put("shareholders", shareholders);
+		List<Factory> factorys=factoryServiceImpl.findAll();
+		map.put("factorys", factorys);
 		return "/admin/bed/list";
 	}
 	@RequestMapping("goInput")
@@ -100,5 +104,14 @@ public class BedController {
 	public @ResponseBody List findHospital() {
 		List list=hospitalServiceImpl.findAll();
 		return list;
+	}
+	@RequestMapping("searchByBid")
+	public String searchByBid(Integer bid,ModelMap map) {
+		Bed bed=bedServiceImpl.findById(bid);
+		List<Bed> beds=new ArrayList<Bed>();
+		beds.add(bed);
+		map.put("beds", beds);
+		return "/admin/bed/list";
+		
 	}
 }
