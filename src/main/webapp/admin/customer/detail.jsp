@@ -7,13 +7,20 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<h4>用户管理/用户/用户详情</h4>
-<a href="findAll">x--</a>
+<%@ include file="/../include/usericon.jsp" %>
+
+<h4>
+	<a href="findAll"><span class="	glyphicon glyphicon-circle-arrow-left"></span></a>
+	用户管理/用户/用户详情
+</h4>
 <hr>
-<h3>基本信息</h3>
+<h5>基本信息</h5>
 
 <input name="cid" type="hidden" value="${customer.cid }">
 手机号:${customer.phone } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

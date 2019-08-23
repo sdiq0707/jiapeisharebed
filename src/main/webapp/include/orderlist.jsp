@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 
-<h3>订单记录</h3>
-<button>导出报表</button> &nbsp;&nbsp;&nbsp;&nbsp; 订单总数：${customer.ordertimes}
-<TABLE border="1px" width="100%">
-	<TR>
+<h5>订单记录</h5>
+<button class="btn btn-success">导出报表</button> &nbsp;&nbsp;&nbsp;&nbsp; <span>订单总数：${customer.ordertimes}</span>
+<TABLE class="table table-bordered table-hover table-striped">
+	<TR class="success">
 		<TD>订单号</TD>
 		<TD>床位号</TD>
 		<TD>所属医院</TD>
