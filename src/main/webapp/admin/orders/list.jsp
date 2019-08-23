@@ -30,9 +30,23 @@
 	function fillH(){
 		$.each(hospitals,function(i,hospital){
 			
-			$("#select-2").append("<option value="+hospital.hid+">"+hospital.hname+"</option>");
+			$("#select-1").append("<option value="+hospital.hid+">"+hospital.hname+"</option>");
 		});
-		fillC(0); 
+		
+	}
+	function fillA(value){	
+		$("#select-2").empty();
+
+		$.each(hospitals,function(i,hospital){
+			var hid=hospital.hid;
+			if(hid==value){
+				cs = hospital.administrative;
+				$.each(cs,function(i,item){
+					$("#select-2").append("<option value="+item.aid+">"+item.aname+"</option>");
+				});
+			}
+		});
+		
 	}
 </script>
 </head>
@@ -43,16 +57,14 @@
 			<input name="onum" placeholder="输入订单号" maxlength="12" type="text"/>
 		</label>
 		<div class="ui-field-contain">
-			<label for="hospital">所属医院</label>
-			<select name="hospital" id="select-2">
-				<option value="" selected="selected">请选择医院</option>
+			<label for="hid">所属医院</label>
+			<select name="hid" id="select-1" onchange="fillA(this.value)">
+				<option value="" selected="selected" >--请选择医院--</option>
 				
 			</select>
-			<label for="administrative">所属科室</label>
-			<select name="administrative" id="select-2">
-				<option value="" selected="selected">请选择科室</option>
-				<option value="B">B</option>
-				<option value="C">C</option>
+			<label for="aid">所属科室</label>
+			<select name="aid" id="select-2" >
+				<option value="" selected="selected">--请先选择医院--</option>
 			</select>
 			<label for="status">订单状态</label>
 			<select name="status" id="select-3">
@@ -64,8 +76,8 @@
 				<option value="6">异常</option>
 			</select>
 		</div>
-		<input type="date" placeholder="请输入开始时间"  name="btime">
-		<input type="date" placeholder="请输入结束时间"  name="etime"><br>
+		请输入开始时间：<input type="date" placeholder="请输入开始时间"  name="btime">
+		请输入结束时间：<input type="date" placeholder="请输入结束时间"  name="etime"><br>
 		<button class="button button-light" type="submit">提交</button>
 		<button type="reset">重置</button>
 	</form>

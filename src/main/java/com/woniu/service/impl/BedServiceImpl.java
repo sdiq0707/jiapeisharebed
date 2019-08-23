@@ -52,6 +52,11 @@ public class BedServiceImpl implements IBedService {
 		// TODO Auto-generated method stub
 		bedMapper.updateByPrimaryKey(bed);
 	}
+	@Override
+	public List findByHandA(Integer hid, Integer aid) {
+		// TODO Auto-generated method stub
+		return bedMapper.selectByHandA(hid, aid);
+	}
 	
 
 }
