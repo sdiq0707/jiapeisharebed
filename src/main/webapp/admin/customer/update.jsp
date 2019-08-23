@@ -15,7 +15,10 @@
 	
 	<%@ include file="/../include/usericon.jsp" %>
 	
-	<h4>用户管理/用户/用户编辑</h4>
+	<h4>
+		<a href="findByIdDetail?cid=${customer.cid }"><span class="	glyphicon glyphicon-circle-arrow-left"></span></a>
+		用户管理/用户/用户编辑
+	</h4>
 	<hr>
 	<h3>基本信息</h3>
 	<form action="update" method="post">
@@ -27,8 +30,8 @@
 		订单总数:${customer.ordertimes}<br>
 		累计消费:${customer.sumconsume }&nbsp;&nbsp;&nbsp;
 		账户余额:${customer.balance }<br>
-		<input type="submit" value="修改">
-		<a href="findByIdDetail?cid=${customer.cid }">取消</a>
+		<input type="submit" class="btn btn-success" value="修改">
+		<input type="reset" class="btn btn-success" value="重置">
 	</form>
 
 <br><hr>
