@@ -86,6 +86,9 @@
 设备厂家联系人:<input type="text" name="productorconnectname" value="${bed.productorconnectname }"><br>
 选择医院：<select id="h" name="hid" onchange="fillA(this.value)"></select>
 选择科室：<select id="a" name="aid" ></select>
+状态:<input type="text" name="bstatus" value="${bed.bstatus }"><br>
+是否故障:<input type="text" name="istrouble" value="${bed.istrouble }"><br>
+是否删除:<input type="text" name="isdelete" value="${bed.isdelete }"><br>
 <input type="submit" value="update"><br>
 </form>
 </body>

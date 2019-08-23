@@ -5,6 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer {
+	@Override
+	public String toString() {
+		return "Customer [orders=" + orders + ", cid=" + cid + ", cname=" + cname + ", phone=" + phone + ", sex=" + sex
+				+ ", cpass=" + cpass + ", cnickname=" + cnickname + ", regtime=" + regtime + ", isdeposit=" + isdeposit
+				+ ", balance=" + balance + ", ordertimes=" + ordertimes + ", sumconsume=" + sumconsume + ", isdelete="
+				+ isdelete + "]";
+	}
+
 	private List<Orders> orders;
 	
 	public List<Orders> getOrders() {

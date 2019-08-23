@@ -4,6 +4,7 @@ import com.woniu.entity.Hospital;
 import com.woniu.entity.HospitalExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface HospitalMapper {
     /**
@@ -52,6 +53,7 @@ public interface HospitalMapper {
      *
      * @mbggenerated Mon Aug 19 15:25:36 CST 2019
      */
+    List<Hospital> selectByExample(HospitalExample example,RowBounds rb);
     List<Hospital> selectByExample(HospitalExample example);
 
     /**

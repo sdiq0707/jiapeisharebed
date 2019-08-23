@@ -27,17 +27,22 @@ public class CustomerController {
 	}
 	@RequestMapping("delete")
 	public String delete(Integer cid) {
+		System.out.println("...................a00000000");
 		customerServiceImpl.delete(cid);
+	System.out.println("...................b00000000");
 		return "redirect:findAll";
 	}
 	@RequestMapping("revoke")
 	public String revoke(Integer cid) {
 		customerServiceImpl.revoke(cid);
+	System.out.println("...................11111111");
 		return "redirect:findAll";
 	}
 	@RequestMapping("findByIdDetail")
 	public String findByIdDetail(Integer cid,ModelMap map) {
+	System.out.println(cid+"++++++++++++");
 		Customer customer=customerServiceImpl.findById(cid);
+	System.out.println(customer);
 		map.put("customer", customer);
 		return "admin/customer/detail";
 	}

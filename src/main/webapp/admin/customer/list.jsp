@@ -12,10 +12,10 @@
 	<div id="app">
 			<h4>用户管理/用户</h4>
 			手机号<INPUT TYPE="text" NAME="phone">
-			性别<INPUT TYPE="text" NAME="sex">
-			注册日期<INPUT TYPE="text"NAME="regtime">
+			性别<INPUT TYPE="text" NAME="sex"><br>
+			注册日期<INPUT TYPE="text"NAME="regtime">至<INPUT TYPE="text"NAME="regtime">
 			<input type="button" value="Query">
-			
+			<br><br><hr>
 			<TABLE border="1px" width="100%">
 				<tr>
 					<td><button>导出报表</button> 用户总数：10000</td>
