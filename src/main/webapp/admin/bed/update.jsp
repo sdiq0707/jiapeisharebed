@@ -31,39 +31,32 @@
 			$.each(hs,function(i,item){
 					if(${hos}==item.hid){
 						$("#h").append("<option value="+item.hid+" selected='selected'>"+item.hname+"</option>");
+					fillA(${hos});
 						}
 					else{
 						$("#h").append("<option value="+item.hid+">"+item.hname+"</option>");
 					}
 				});
+			
+		}
+	function fillA(index){
 			for(var i=0;i<hs.length;i++){
+				if(hs[i].hid==index){
 					as =hs[i].administrative;
-			}
+					}
+				}
 			$.each(as,function(i,item){
 				if(${adm}==item.aid){
 					$("#a").append("<option value="+item.aid+" selected='selected'>"+item.aname+"</option>");
-				}else{
+					
+					}else{
 					$("#a").append("<option value="+item.aid+">"+item.aname+"</option>");
 					}
-				
-			});
-		}
-		function fillA(index){
-				$("#a").empty();
-				for(var i=0;i<hs.length;i++){
-					if(hs[i].hid==index){
-						as =hs[i].administrative;
-						}
-				}
-				$.each(as,function(i,item){
-					if(${adm}==item.aid){
-						$("#a").append("<option value="+item.aid+" selected='selected'>"+item.aname+"</option>");
-					}else{
-						$("#a").append("<option value="+item.aid+">"+item.aname+"</option>");
-						}
-					
 				});
-			}
+		}
+		
+	
+		
 		
 </script>
 <meta charset="utf-8">
@@ -71,7 +64,7 @@
 </head>
 <body>
 <form action="update" method="post">
-<input type="hidden" name="bid">
+<input type="hidden" name="bid" value="${bed.bid }">
 选择厂家:<c:forEach items="${factorys }" var="factory">
 			<input type="radio" name="fid" value="${factory.fid }" 
 			<c:if test="${factory.fid==bed.fid }">checked="checked"</c:if>
@@ -84,8 +77,8 @@
 		</c:forEach><br>
 床位编号:<input type="text" name="bnum" value="${bed.bnum }"><br>
 设备厂家联系人:<input type="text" name="productorconnectname" value="${bed.productorconnectname }"><br>
-选择医院：<select id="h" name="hid" onchange="fillA(this.value)"></select>
-选择科室：<select id="a" name="aid" ></select>
+选择医院：<select id="h" name="hid" onchange="fillA(this.value)"></select><br>
+选择科室：<select id="a" name="aid" ></select><br>
 状态:<input type="text" name="bstatus" value="${bed.bstatus }"><br>
 是否故障:<input type="text" name="istrouble" value="${bed.istrouble }"><br>
 是否删除:<input type="text" name="isdelete" value="${bed.isdelete }"><br>
