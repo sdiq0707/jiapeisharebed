@@ -89,7 +89,10 @@ public class BedController {
 		return "/admin/bed/update";
 	}
 	@RequestMapping("update")
-	public String update(Bed bed) {
+	public String update(Bed bed,Hospital hospital,Administrative administrative) {
+		String hos=hospital.getHid().toString();
+		String adm=administrative.getAid().toString();
+		bed.setFkid(hos+"X"+adm);
 		bedServiceImpl.update(bed);
 		return "redirect:findAll";
 	}
