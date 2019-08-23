@@ -17,6 +17,7 @@ import com.woniu.entity.Hospital;
 import com.woniu.entity.OrderSelect;
 import com.woniu.entity.Orders;
 import com.woniu.service.IAdministrativeService;
+import com.woniu.service.IBedService;
 import com.woniu.service.IHospitalService;
 import com.woniu.service.IOrdersService;
 
@@ -28,11 +29,13 @@ public class OrdersController {
 	@Resource
 	private IHospitalService hospitalServiceImpl;
 	@Resource
-	private IAdministrativeService administrativeServiceImpl;
+	private IBedService BedServiceImpl;
 	
 	@RequestMapping("findAll")
 	public String findAll(ModelMap map ,OrderSelect orderSelect) {
+
 		List<Orders> list = ordersServiceImpl.findAll(orderSelect);
+		System.out.println(orderSelect.toString());
 		map.put("list", list);		
 		return "admin/orders/list";
 	}

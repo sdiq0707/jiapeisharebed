@@ -11,4 +11,5 @@ public interface IBedService {
 	public void revoke(Integer bid);
 	public Bed findById(Integer bid);
 	public void update(Bed bed);
+	public List findByHandA(Integer hid,Integer aid);
 }

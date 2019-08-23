@@ -22,6 +22,14 @@
   	SELECT * from bed b WHERE EXISTS (
 		SELECT o.bid from orders o where o.oid=#{oid} AND b.bid=o.bid)
   </select>
+  
+  
+<!--   下面的方法时根据医院和科室的id超找床位的id -->
+	<select id="selectByHandA" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
+	SELECT b.bid FROM bed b,hospitaladministrative ha where ha.hid=1 AND ha.aid=3 and b.fkid=ha.fk_id
+	</select>
+
+
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbggenerated

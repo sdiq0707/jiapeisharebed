@@ -13,12 +13,15 @@ import com.woniu.entity.OrderSelect;
 import com.woniu.entity.Orders;
 import com.woniu.entity.OrdersExample;
 import com.woniu.entity.OrdersExample.Criteria;
+import com.woniu.mapper.BedMapper;
 import com.woniu.mapper.OrdersMapper;
 import com.woniu.service.IOrdersService;
 @Service
 public class OrdersServiceImpl implements IOrdersService {
 	@Resource
 	private OrdersMapper ordersMapper;
+	@Resource
+	private BedMapper bedmMapper;
 	@Override
 	public void addOrders(Orders order) {
 		// TODO Auto-generated method stub
@@ -65,9 +68,12 @@ public class OrdersServiceImpl implements IOrdersService {
 		}
 		criteria.andOrdertimeBetween(btime, etime);
 		
-		//根据医院查找
-		//criteria.andBidIn(values);
-		//根据科室查找
+		//根据医院查找和科室查找
+		if(orderSelect.getHid()!=null&&orderSelect.getAid()!=null) {
+			List<Integer> list = bedmMapper.selectByHandA(orderSelect.getHid(), orderSelect.getAid());		
+			criteria.andBidIn(list);
+			
+		}
 		return ordersMapper.selectByExample(example);
 	}
 
