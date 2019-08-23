@@ -9,17 +9,17 @@
 <title>用户管理</title>
 </head>
 <body>
-	<div id="app">
-			<h4>用户管理/用户</h4>
-			手机号<INPUT TYPE="text" NAME="phone">
-			性别<INPUT TYPE="text" NAME="sex"><br>
-			注册日期<INPUT TYPE="text"NAME="regtime">至<INPUT TYPE="text"NAME="regtime">
-			<input type="button" value="Query">
+		<h4>用户管理/用户</h4>
+		<form method="post" action="findAll">
+			手机号<INPUT TYPE="text" NAME="phone" value="${customer.phone }">
+			性别<INPUT TYPE="text" NAME="sex" value="${customer.sex }"><br>
+			<input type="submit" value="Query">
+		</form>
+			注册日期<INPUT TYPE="date"  NAME="regtime" value="${customer.regtime }">
+			至<INPUT TYPE="date" pattern="yy-MM-dd" name="etime"  value="${customer.regtime }">
 			<br><br><hr>
+			<button>导出报表</button> &nbsp;&nbsp;&nbsp;&nbsp; 用户总数：${count}
 			<TABLE border="1px" width="100%">
-				<tr>
-					<td><button>导出报表</button> 用户总数：10000</td>
-				</tr>
 				<TR>
 					<TD>手机号</TD>
 					<TD>昵称</TD>
@@ -52,6 +52,5 @@
 					</TR>
 				</c:forEach>
 			</TABLE>
-	</div>
 </body>
 </html>
