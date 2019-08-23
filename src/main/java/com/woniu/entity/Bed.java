@@ -7,7 +7,15 @@ public class Bed {
 				+ ", productorconnectname=" + productorconnectname + ", bstatus=" + bstatus + ", istrouble=" + istrouble
 				+ ", isdelete=" + isdelete + ", fkid=" + fkid + "]";
 	}
+	private Hospitaladministrative hospitaiAdministrative;
+	
+	public Hospitaladministrative getHospitaiAdministrative() {
+		return hospitaiAdministrative;
+	}
 
+	public void setHospitaiAdministrative(Hospitaladministrative hospitaiAdministrative) {
+		this.hospitaiAdministrative = hospitaiAdministrative;
+	}
 	private Factory factory;
 	
 	public Factory getFactory() {

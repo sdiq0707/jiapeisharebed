@@ -23,6 +23,9 @@
 		SELECT aid from hospitaladministrative where hid=#{hid} and aid=a.aid
 	)
   </select>
+  <select id="findByFkId" resultMap="BaseResultMap">
+  	select a.* from hospital a,hospitaladministrative b where a.hid=b.hid and fk_id='${fk_id}';
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

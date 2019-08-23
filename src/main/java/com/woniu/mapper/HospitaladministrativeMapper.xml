@@ -10,7 +10,12 @@
     <id column="aid" property="aid" jdbcType="INTEGER" />
     <id column="hid" property="hid" jdbcType="INTEGER" />
     <result column="fk_id" property="fkId" jdbcType="VARCHAR" />
+    <collection property="hospital" column="fk_id" select="com.woniu.mapper.HospitalMapper.findByFkId"></collection>
+    <collection property="administrative" column="fk_id" select="com.woniu.mapper.AdministrativeMapper.findByFkId"></collection>
   </resultMap>
+  <select id="com.woniu.mapper.HospitaladministrativeMapper.findByFkId" resultMap="BaseResultMap">
+  	select a.* from hospitaladministrative a,bed where fk_id=fkid and fkid='${fkid}' limit 0,1;
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
