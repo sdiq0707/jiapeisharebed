@@ -17,6 +17,7 @@
     <result column="isdelete" jdbcType="INTEGER" property="isdelete" />
     <result column="fkid" jdbcType="VARCHAR" property="fkid" />
     <collection property="factory" column="bid" select="com.woniu.mapper.FactoryMapper.findByBid"></collection>
+  	<collection property="hospitaiAdministrative" column="fkid" select="com.woniu.mapper.HospitaladministrativeMapper.findByFkId"></collection>
   </resultMap>
   <select id="findByOid" resultMap="BaseResultMap">
   	SELECT * from bed b WHERE EXISTS (
