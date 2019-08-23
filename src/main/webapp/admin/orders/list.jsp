@@ -1,11 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$.ajaxSetup({
+			global:true,
+			type:"POST",
+			async:false,
+			cache:false
+		});
+	var hospitals;
+	var cs;
+	$(function(){
+		$.ajax({
+			   url: "findAllhospital",
+			   dataType:"json",
+			   success: function(msg){
+				hospitals = msg;
+			    fillH(); 
+			   }
+		});
+	});
+	function fillH(){
+		$.each(hospitals,function(i,hospital){
+			
+			$("#select-2").append("<option value="+hospital.hid+">"+hospital.hname+"</option>");
+		});
+		fillC(0); 
+	}
+</script>
 </head>
 <body>
 	<form action="/admin/orders/findAll" method="post">
@@ -17,8 +46,7 @@
 			<label for="hospital">所属医院</label>
 			<select name="hospital" id="select-2">
 				<option value="" selected="selected">请选择医院</option>
-				<option value="B">B</option>
-				<option value="C">C</option>
+				
 			</select>
 			<label for="administrative">所属科室</label>
 			<select name="administrative" id="select-2">
@@ -64,25 +92,31 @@
 				<!-- //订单号 -->
 				<th>${orders.onum}</th>
 				<!-- 床位编号 -->
-				<th>${orders.actualpay}</th>
+				<th>${orders.actualpay }</th>
 				<!-- 支付金额 -->
-				<th>${orders.actualpay}</th>
+				<th>${orders.actualpay }</th>
 				<!-- 支付状态 -->
-				<th>${orders.paystatus}</th>
+				<th>${orders.paystatus }</th>
 				<!-- 下单时间 -->
-				<th>${orders.ordertime}</th>
+				<th>
+				<fmt:formatDate value="${orders.ordertime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+				</th>
 				<!--归还时间-->
-				<th>${orders.returntime}</th>
+				<th>
+				<fmt:formatDate value="${orders.returntime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+				</th>
 				<!--支付时间-->
-				<th>${orders.paytime}</th>
+				<th>
+				<fmt:formatDate value="${orders.paytime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+				</th>
 				<!--所属医院-->
 				<th></th>
 				<!--所属科室-->
 				<th></th>
 				<!--用户手机号-->
-				<th>${orders.cid}</th>
+				<th>${orders.cid }</th>
 				<!--订单状态-->
-				<th>${orders.orderstatus}</th>				
+				<th>${orders.orderstatus }</th>				
 				<th>
 				<a href="findById?oid=${orders.oid }">详情</a>
 				|

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,15 @@
 	<div class="ui-grid-b" style="width: 80%">
 		<div class="ui-block-a">订单号 ： ${orders.onum }</div>
 		<div class="ui-block-b">订单状态： ${orders.orderstatus }</div>
-		<div class="ui-block-c">租用时常 ：${orders.onum }</div>
-		<div class="ui-block-a">下单时间 ：${orders.ordertime }</div>
-		<div class="ui-block-b">归还时间： ${orders.returntime }</div>
+		<div class="ui-block-c">
+		租用时常 ：${days } 天${hours }小时${minutes }分
+		</div>
+		<div class="ui-block-a">下单时间 ：
+			<fmt:formatDate value="${orders.ordertime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+		</div>
+		<div class="ui-block-b">归还时间： 
+		<fmt:formatDate value="${orders.returntime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+		</div>
 		<div class="ui-block-c">是否异常 ：${orders.isunusual }</div>
 		<div class="ui-block-a">异常类型： ${orders.unusualtype }</div>
 		<div class="ui-block-b">租用金额： ${orders.actualpay }</div>
@@ -33,7 +40,10 @@
 	<h2>支付信息</h2>
 	<div class="ui-grid-b">
 		<div class="ui-block-a">支付状态：${orders.paystatus }</div>
-		<div class="ui-block-b">支付时间：${orders.paytime }</div>	
+		<div class="ui-block-b">
+		支付时间：
+		<fmt:formatDate value="${orders.paytime }" pattern="yyyy-MM-dd hh:mm:ss"/>
+		</div>	
 	</div>
 </body>
 
