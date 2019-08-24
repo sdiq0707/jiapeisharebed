@@ -22,7 +22,30 @@
   </resultMap>
   
   
+  <select id="search" resultMap="BaseResultMap" parameterType="com.woniu.entity.TroubleSearchExample">
   
+  SELECT * FROM trouble WHERE 1=1 
+  
+  <if test="hospital != '' and hospital != null">
+  and bid IN
+	(SELECT bid FROM bed WHERE fkid IN
+		(SELECT  fk_id FROM hospitaladministrative WHERE hid =
+			(SELECT hid FROM hospital WHERE hname = #{hospital })))
+  </if>
+  
+  <if test="ttype != null and ttype != '' ">
+	and ttype = #{ttype }
+  </if>
+  
+  <if test="tstatus != null and tstatus != '' ">
+	and tstatus = #{tstatus }
+  </if>
+  
+   <if test="startTime != null and startTime != ''  and endTime != null and endTime != '' ">
+	and TIMESTAMP(tdeclaretime)  BETWEEN #{startTime } AND #{endTime }
+  </if>
+  
+  </select>
   
   
   

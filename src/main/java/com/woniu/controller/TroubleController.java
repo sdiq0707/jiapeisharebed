@@ -14,13 +14,16 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Trouble;
+import com.woniu.entity.TroubleSearchExample;
 import com.woniu.service.IBedService;
 import com.woniu.service.IHospitalService;
 import com.woniu.service.ITroubleService;
@@ -95,6 +98,16 @@ public class TroubleController {
 		}finally {
 			return msg;
 		}
+	}
+	
+	@RequestMapping("search")
+	public Map search( TroubleSearchExample example) {
+		System.out.println("search=======================================");
+		System.out.println(example.getHospital());
+		List troubles = troubleServiceImpl.search(example);
+		Map map = new HashMap();
+		map.put("rows", troubles);
+		return map;
 	}
 	
 	@RequestMapping("deleteById")
