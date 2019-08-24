@@ -1,5 +1,6 @@
 package com.woniu.mapper;
 
+import com.woniu.entity.Hospital;
 import com.woniu.entity.Trouble;
 import com.woniu.entity.TroubleExample;
 import java.util.List;
@@ -13,6 +14,8 @@ public interface TroubleMapper {
      *
      * @mbggenerated Mon Aug 19 15:25:36 CST 2019
      */
+	
+	
     int countByExample(TroubleExample example);
 
     /**

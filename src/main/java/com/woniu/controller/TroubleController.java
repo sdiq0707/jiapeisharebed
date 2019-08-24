@@ -22,6 +22,7 @@ import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Trouble;
 import com.woniu.service.IBedService;
+import com.woniu.service.IHospitalService;
 import com.woniu.service.ITroubleService;
 
 @RestController
@@ -68,6 +69,7 @@ public class TroubleController {
 		List beds = bedServiceImpl.findAll();
 		return beds;
 	}
+	
 @InitBinder
  public void initBinder(WebDataBinder binder, WebRequest request) {
       DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");

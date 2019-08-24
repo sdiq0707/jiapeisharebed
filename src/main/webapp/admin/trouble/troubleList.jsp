@@ -32,19 +32,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"
      data-options="iconCls:'icon-save',modal:true,closed:true">
     <form id="form" method="post">
-        <input hidden="hidden" name="tid" >
-        故障标题：<input  type="text" name="ttitle"/><br/>
+        <input hidden="hidden" name="tid">
+        故障标题：<input type="text" name="ttitle"/><br/>
         故障描述：<input type="text" name="tdescribe"/><br/>
         故障类型：<input type="text" name="ttype"/><br/>
         申报人：<input type="text" name="tdeclarant"/><br/>
         申报人电话：<input type="text" name="declarantphone"/><br/>
         故障时间：<input id="dd" type="text" name="tdeclaretime" class="easyui-datebox" required="required"/><br/>
+        所属医院：
+        <div id="app2">
+            <SELECT id="hos" NAME="bid">
+                <option v-for="p in json">{{p.hname}}</option>
+            </SELECT>
+        </div>
         床位号：
         <div id="app">
             <SELECT id="p" NAME="bid">
-            <option v-for="p in json">{{p.bid}}</option>
-        </SELECT>
+                <option v-for="p in json">{{p.bid}}</option>
+            </SELECT>
         </div>
+
         <button type="button" onclick="sub()">save</button>
         <br/>
     </form>
@@ -52,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 </html>
 <script type="text/javascript">
-    var formflag='';
+    var formflag = '';
     $(function () {
         $('#dg').datagrid({
             url: 'findAll',
@@ -66,6 +73,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {field: 'ttitle', title: '故障标题', width: 100},
                 {field: 'tdescribe', title: '故障描述', width: 100, align: 'center'},
                 {field: 'ttype', title: '故障类型', width: 100, align: 'center'},
+                {
+                    field: 'hospital', title: '所属医院', width: 100, align: 'center',
+                    formatter: function (value, row, index) {
+                        return value.hname;
+                    }
+                },
                 {field: 'tdeclarant', title: '申报人', width: 100, align: 'center'},
                 {field: 'declarantphone', title: '申报人电话', width: 100, align: 'center'},
                 {
@@ -176,24 +189,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function openForm() {
         $('#win').window('open');
     }
-    function add(){
+
+    function add() {
         openForm();
         $('#win').panel({title: "新增故障"});
-        formflag='add';
+        formflag = 'add';
         dosth();
 
     }
-    function updateById(tid){
+
+    function updateById(tid) {
         openForm();
         $('#win').panel({title: "编辑故障"});
-        formflag='update';
+        formflag = 'update';
         dosth(tid);
 
     }
-var url='';
+
+    var url = '';
+
     function dosth(tid) {
-        if(formflag==='update'){
-            $.post("findByTid",{tid:tid},function(data){
+        if (formflag === 'update') {
+            $.post("findByTid", {tid: tid}, function (data) {
                 $("#form input").each(function (i, item) {
                     var name = $(item).attr("name");
                     $(item).val(data[name]);
@@ -212,9 +229,9 @@ var url='';
                 })
 
             });
-            url='updateById';
-        }else {
-            url='save';
+            url = 'updateById';
+        } else {
+            url = 'save';
             $("#form input").empty();
         }
 
@@ -251,7 +268,7 @@ var url='';
             el: '#app',
             data: {
                 json: '',
-                beds:'',
+                beds: '',
             },
             mounted: function () {
                 this.fillP();
@@ -272,8 +289,31 @@ var url='';
 
             }
         });
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                json: '',
+                beds: '',
+            },
+            mounted: function () {
+                this.fillP();
+            },
+            methods: {
+                fillP: function () {
+                    this.$http({
+                        method: 'post',
+                        url: 'findAllHospital',
+                        emulateJSON: true,
+                        params: {},
+                    }).then(function (res) {
+                        this.json = res.body;
+                    }, function () {
+                        console.log('请求失败处理');
+                    });
+                },
+
+            }
+        });
 
     }
-
-
 </script>
