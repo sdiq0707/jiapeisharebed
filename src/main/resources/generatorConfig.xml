@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
-	 <classPathEntry location="D:\mysql-connector-java-5.0.8-bin.jar"/>
+	 <classPathEntry location="E:\workTool\mysql-connector-java-5.0.8-bin.jar"/>
   <context id="context1" >
     <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.111.31.86:3306/prj1" userId="prj1" password="#@$*()#$" />
     <javaModelGenerator targetPackage="com.woniu.entity" targetProject="jiapeisharebed" ></javaModelGenerator>
@@ -10,9 +10,6 @@
     
     
     <table schema="" tableName="bed" ></table>
-    <table schema="" tableName="province" ></table>
-    <table schema="" tableName="city" ></table>
-    <table schema="" tableName="zone" ></table>
     
   </context>
 </generatorConfiguration>

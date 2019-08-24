@@ -1,6 +1,7 @@
 package com.woniu.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -113,5 +114,28 @@ public class BedController {
 		map.put("beds", beds);
 		return "/admin/bed/list";
 		
+	}
+	@RequestMapping("searchByCondition")
+	public String searchByCondition(Integer hid,Integer aid,Integer fid,Integer uid,ModelMap map) {
+		List<Bed> beds=bedServiceImpl.searchByCondition(hid, aid, fid, uid);
+		System.out.println("******************aid:"+aid);
+		for(Iterator iterator=beds.iterator();iterator.hasNext();) {
+			Bed bed=(Bed) iterator.next();
+			String fkid=bed.getFkid();
+			String []hosXadm=fkid.split("X");
+			Integer hos=Integer.parseInt(hosXadm[0]);
+			Integer adm=Integer.parseInt(hosXadm[1]);
+			if((!hid.equals(0))&&(!hid.equals(hos))&&(!aid.equals(0))&&(!aid.equals(adm))) {
+				iterator.remove();
+			}else if((!hid.equals(0))&&(!hid.equals(hos))) {
+				iterator.remove();
+			}else if((!aid.equals(0))&&(!aid.equals(adm))) {
+				System.out.println("******************adm:"+adm);
+				System.out.println(bed.getHospitaiAdministrative().getAdministrative().getAname());
+				iterator.remove();
+			}
+		}
+		map.put("beds", beds);
+		return "/admin/bed/list";
 	}
 }

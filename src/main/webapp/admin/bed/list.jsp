@@ -2,6 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -30,7 +32,7 @@
 			$.each(hs,function(i,item){
 					$("#h").append("<option value="+item.hid+">"+item.hname+"</option>");
 				});
-				fillA(1);
+				fillA(0);
 		}
 		function fillA(index){
 				$("#a").empty();
@@ -48,11 +50,12 @@
 <title>床位管理</title>
 </head>
 <body>
-<form action="searchByBid" method="post">
+<h4 align="center">床位管理</h4>
+<form action="searchByBid" method="post" class="form-inline" role="form">
 	<input type="text" name="bid" placeholder="请输入床位ID">
 	<input type="submit" value="搜索">
 </form>
-<form action="searchByCondition" method="post">
+<form action="searchByCondition" method="post" class="form-inline" role="form">
 	选择医院：<select id="h" name="hid" onchange="fillA(this.value)"></select>
 	选择科室：<select id="a" name="aid" ></select><br>
 	选择厂家:<c:forEach items="${factorys }" var="factory">
@@ -63,12 +66,10 @@
 			<input type="radio" name="uid" value="${shareholder.uid }">
 			${shareholder.userinfo.uname }
 		</c:forEach>
-	<input type="submit" value="搜索">
+	<input type="submit" value="条件查询">
 </form>
-<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow
-(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
-<a href="goInput">新增</a>
-<table border="1" width="100%">
+<a href="goInput" class="btn btn-primary">新增</a>
+<table class="table table-striped" >
 <tr>
 	<td>床位ID</td>
 	<td>生产厂家ID</td>
@@ -104,6 +105,5 @@
 </tr>
 </c:forEach>
 </table>
-
 </body>
 </html>

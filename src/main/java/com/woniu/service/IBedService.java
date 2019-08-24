@@ -12,4 +12,5 @@ public interface IBedService {
 	public Bed findById(Integer bid);
 	public void update(Bed bed);
 	public List findByHandA(Integer hid,Integer aid);
+	public List searchByCondition(Integer hid,Integer aid,Integer fid,Integer uid);
 }
