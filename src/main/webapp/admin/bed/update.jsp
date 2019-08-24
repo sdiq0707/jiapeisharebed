@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,26 +64,27 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h4 align="center">修改床位</h4>
 <form action="update" method="post">
 <input type="hidden" name="bid" value="${bed.bid }">
-选择厂家:<c:forEach items="${factorys }" var="factory">
+<font class="col-md-1">选择厂家:</font><c:forEach items="${factorys }" var="factory">
 			<input type="radio" name="fid" value="${factory.fid }" 
 			<c:if test="${factory.fid==bed.fid }">checked="checked"</c:if>
 			/>${factory.fname }
 		</c:forEach><br>
-选择股东:<c:forEach items="${shareholders }" var="shareholder">
+<font class="col-md-1">选择股东:</font><c:forEach items="${shareholders }" var="shareholder">
 			<input type="radio" name="uid" value="${shareholder.uid }"
 			<c:if test="${shareholder.uid==bed.uid }">checked="checked"</c:if>
 			>${shareholder.userinfo.uname }
 		</c:forEach><br>
-床位编号:<input type="text" name="bnum" value="${bed.bnum }"><br>
-设备厂家联系人:<input type="text" name="productorconnectname" value="${bed.productorconnectname }"><br>
-选择医院：<select id="h" name="hid" onchange="fillA(this.value)"></select><br>
-选择科室：<select id="a" name="aid" ></select><br>
-状态:<input type="text" name="bstatus" value="${bed.bstatus }"><br>
-是否故障:<input type="text" name="istrouble" value="${bed.istrouble }"><br>
-是否删除:<input type="text" name="isdelete" value="${bed.isdelete }"><br>
-<input type="submit" value="update"><br>
+<font class="col-md-1">床位编号:</font><input type="text" name="bnum" value="${bed.bnum }"><br>
+<font class="col-md-1">厂家联系人:</font><input type="text" name="productorconnectname" value="${bed.productorconnectname }"><br>
+<font class="col-md-1">选择医院:</font><select id="h" name="hid" onchange="fillA(this.value)"></select><br>
+<font class="col-md-1">选择科室:</font><select id="a" name="aid" ></select><br>
+<font class="col-md-1">状态:</font><input type="text" name="bstatus" value="${bed.bstatus }"><br>
+<font class="col-md-1">是否故障:</font><input type="text" name="istrouble" value="${bed.istrouble }"><br>
+<font class="col-md-1">是否删除:</font><input type="text" name="isdelete" value="${bed.isdelete }"><br>
+<input type="submit" class="btn btn-primary" value="修改"><br>
 </form>
 </body>
 </html>

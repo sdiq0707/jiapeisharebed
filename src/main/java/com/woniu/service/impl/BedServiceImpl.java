@@ -64,10 +64,10 @@ public class BedServiceImpl implements IBedService {
 		// TODO Auto-generated method stub
 		BedExample be=new BedExample();
 		Criteria criteria = be.createCriteria();
-		if(fid!=null) {
+		if(fid!=null&&!(fid.equals(0))) {
 			criteria.andFidEqualTo(fid);
 		}
-		if(uid!=null) {
+		if(uid!=null&&!(uid.equals(0))) {
 		criteria.andUidEqualTo(uid);
 		}
 		List<Bed> beds=bedMapper.selectByExample(be);
