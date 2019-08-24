@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         故障时间：<input id="dd" type="text" name="tdeclaretime" class="easyui-datebox" required="required"/><br/>
         所属医院：
         <div id="app2">
-            <SELECT id="hos" NAME="bid">
+            <SELECT id="hos" NAME="hospital" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;">
                 <option v-for="p in json">{{p.hname}}</option>
             </SELECT>
         </div>
@@ -73,12 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {field: 'ttitle', title: '故障标题', width: 100},
                 {field: 'tdescribe', title: '故障描述', width: 100, align: 'center'},
                 {field: 'ttype', title: '故障类型', width: 100, align: 'center'},
-                {
-                    field: 'hospital', title: '所属医院', width: 100, align: 'center',
-                    formatter: function (value, row, index) {
-                        return value.hname;
-                    }
-                },
+                {field: 'hospital', title: '所属医院', width: 100, align: 'center'},
                 {field: 'tdeclarant', title: '申报人', width: 100, align: 'center'},
                 {field: 'declarantphone', title: '申报人电话', width: 100, align: 'center'},
                 {

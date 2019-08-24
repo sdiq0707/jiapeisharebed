@@ -19,8 +19,8 @@
     <collection property="administrative" column="hid" select="com.woniu.mapper.AdministrativeMapper.findByHid"></collection>
   </resultMap>
   
-  <select id="findByTid" resultMap="BaseResultMap">
-  	SELECT * FROM hospital WHERE hid = 
+  <select id="findByTid" resultType="java.lang.String">
+  	SELECT hname FROM hospital WHERE hid = 
 	(SELECT hid FROM hospitaladministrative WHERE fk_id = 
 	(SELECT fkid FROM bed WHERE bid =
 	(SELECT bid FROM trouble WHERE tid = #{tid })))

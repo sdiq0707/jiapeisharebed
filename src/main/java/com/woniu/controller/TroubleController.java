@@ -32,9 +32,14 @@ public class TroubleController {
 	private ITroubleService troubleServiceImpl;
 	@Resource
 	private IBedService bedServiceImpl;
+	@Resource
+	private IHospitalService hospitalServiceImpl;
+	
+	
 	
 	@RequestMapping("save")
 	public Message save(Trouble trouble) {
+		System.out.println(trouble);
 		Message msg = new Message(true, "");
 		try {
 			troubleServiceImpl.save(trouble);
@@ -77,6 +82,7 @@ public class TroubleController {
   }
 	@RequestMapping("updateById")
 	public Message update(Trouble trouble) {
+		System.out.println(trouble);
 		Message msg = new Message(true, "");
 		try {
 			troubleServiceImpl.update(trouble);
@@ -121,5 +127,11 @@ public class TroubleController {
 		}finally {
 			return msg;
 		}
+	}
+	
+	@RequestMapping("findAllHospital")
+	public List findAllHospital() {
+		List hospitaleds = hospitalServiceImpl.findAll();
+		return hospitaleds;
 	}
 }
