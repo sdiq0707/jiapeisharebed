@@ -18,7 +18,15 @@
     <result column="bid" property="bid" jdbcType="INTEGER" />
     <result column="isdeclare" property="isdeclare" jdbcType="BIT" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <collection property="hospital" column="tid" select="com.woniu.mapper.HospitalMapper.findByTid"></collection>
   </resultMap>
+  
+  
+  
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
