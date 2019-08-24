@@ -30,7 +30,7 @@
 			$.each(hs,function(i,item){
 					$("#h").append("<option value="+item.hid+">"+item.hname+"</option>");
 				});
-				fillA(1);
+				fillA(0);
 		}
 		function fillA(index){
 				$("#a").empty();
@@ -63,7 +63,7 @@
 			<input type="radio" name="uid" value="${shareholder.uid }">
 			${shareholder.userinfo.uname }
 		</c:forEach>
-	<input type="submit" value="搜索">
+	<input type="submit" value="条件查询">
 </form>
 <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow
 (color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>

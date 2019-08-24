@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Bed;
+import com.woniu.entity.BedExample;
+import com.woniu.entity.BedExample.Criteria;
 import com.woniu.mapper.BedMapper;
 import com.woniu.service.IBedService;
 @Service
@@ -56,6 +58,20 @@ public class BedServiceImpl implements IBedService {
 	public List findByHandA(Integer hid, Integer aid) {
 		// TODO Auto-generated method stub
 		return bedMapper.selectByHandA(hid, aid);
+	}
+	@Override
+	public List searchByCondition(Integer hid, Integer aid, Integer fid, Integer uid) {
+		// TODO Auto-generated method stub
+		BedExample be=new BedExample();
+		Criteria criteria = be.createCriteria();
+		if(fid!=null) {
+			criteria.andFidEqualTo(fid);
+		}
+		if(uid!=null) {
+		criteria.andUidEqualTo(uid);
+		}
+		List<Bed> beds=bedMapper.selectByExample(be);
+		return beds;
 	}
 	
 
