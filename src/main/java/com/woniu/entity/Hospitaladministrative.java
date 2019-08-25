@@ -32,4 +32,6 @@ public class Hospitaladministrative extends HospitaladministrativeKey {
     public void setFkId(String fkId) {
         this.fkId = fkId;
     }
+    
+    
 }
