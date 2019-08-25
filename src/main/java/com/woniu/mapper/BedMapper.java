@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BedMapper {
+	//查找医院下所有床的id
+	List<Integer> selectByHid(Integer hid);
 	//根据医院和科室查找床的id  注意，这个返回的list是床的id不是床的对象
 	List<Integer> selectByHandA(Integer hid,Integer aid);
 	/**
