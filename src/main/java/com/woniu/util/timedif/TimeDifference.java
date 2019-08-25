@@ -1,5 +1,6 @@
 package com.woniu.util.timedif;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,5 +33,10 @@ public class TimeDifference {
 			   e.printStackTrace();
 		   }
 		return str;
+	}
+	public Date getDate(String str) throws ParseException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = df.parse(str);
+		return date;
 	}
 }

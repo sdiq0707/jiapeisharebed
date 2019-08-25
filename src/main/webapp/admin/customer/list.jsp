@@ -9,8 +9,6 @@
 <title>用户管理</title>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
 </head>
 <body>
 
@@ -21,11 +19,14 @@
 		<form method="post" action="findAll">
 			手机号<INPUT TYPE="text" NAME="phone" value="${customer.phone }">
 			性别<INPUT TYPE="text" NAME="sex" value="${customer.sex }">
+			注册日期<INPUT TYPE="date" NAME="time1" value='<f:formatDate value="${customer.time1}"
+								pattern="yyyy-MM-dd"/>'/>
+			至<INPUT TYPE="date" NAME="time2" value='<f:formatDate value="${customer.time2}"
+								pattern="yyyy-MM-dd"/>'/>
 			<input type="submit" value="Query" class="btn btn-success">
 		</form>
-			注册日期<INPUT TYPE="date"  NAME="regtime" value="${customer.regtime }">
-			至<INPUT TYPE="date" pattern="yy-MM-dd" name="etime"  value="${customer.regtime }">
 			<br><br><hr>
+			
 			<button class="btn btn-success">导出报表</button> 
 			<span >用户总数：</span>${count}
 			<TABLE class="table table-bordered table-hover table-striped">
