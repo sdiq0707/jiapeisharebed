@@ -13,7 +13,7 @@
 			global:true,
 			type:"POST",
 			async:false,
-			cache:false
+			cache:true
 		});
 	var hospitals;
 	var cs;
@@ -30,9 +30,23 @@
 	function fillH(){
 		$.each(hospitals,function(i,hospital){
 			
-			$("#select-2").append("<option value="+hospital.hid+">"+hospital.hname+"</option>");
+			$("#select-1").append("<option value="+hospital.hid+">"+hospital.hname+"</option>");
 		});
-		fillC(0); 
+		
+	}
+	function fillA(value){	
+		$("#select-2").empty();
+		$("#select-2").append("<option value=\"\" selected=\"selected\">-请先选择医院-</option>");
+		$.each(hospitals,function(i,hospital){
+			var hid=hospital.hid;
+			if(hid==value){
+				cs = hospital.administrative;
+				$.each(cs,function(i,item){
+					$("#select-2").append("<option value="+item.aid+">"+item.aname+"</option>");
+			});
+			}
+		});
+		
 	}
 </script>
 </head>
@@ -43,16 +57,14 @@
 			<input name="onum" placeholder="输入订单号" maxlength="12" type="text"/>
 		</label>
 		<div class="ui-field-contain">
-			<label for="hospital">所属医院</label>
-			<select name="hospital" id="select-2">
-				<option value="" selected="selected">请选择医院</option>
+			<label for="hid">所属医院</label>
+			<select name="hid" id="select-1" onchange="fillA(this.value)">
+				<option value="" selected="selected" >--请选择医院--</option>
 				
 			</select>
-			<label for="administrative">所属科室</label>
-			<select name="administrative" id="select-2">
-				<option value="" selected="selected">请选择科室</option>
-				<option value="B">B</option>
-				<option value="C">C</option>
+			<label for="aid">所属科室</label>
+			<select name="aid" id="select-2" >
+				<option value="" selected="selected">--请先选择医院--</option>
 			</select>
 			<label for="status">订单状态</label>
 			<select name="status" id="select-3">
@@ -64,11 +76,14 @@
 				<option value="6">异常</option>
 			</select>
 		</div>
-		<input type="date" placeholder="请输入开始时间"  name="btime">
-		<input type="date" placeholder="请输入结束时间"  name="etime"><br>
+		请输入开始时间：<input type="date" placeholder="请输入开始时间"  name="btime">
+		请输入结束时间：<input type="date" placeholder="请输入结束时间"  name="etime"><br>
 		<button class="button button-light" type="submit">提交</button>
 		<button type="reset">重置</button>
 	</form>
+	<div>
+		<h4>共${count }条记录</h4>
+	</div>
 	<table id="table-1" border="1">
 		<thead>
 			<tr>
@@ -90,38 +105,44 @@
 		<c:forEach items="${list }" var="orders">
 			<tr>
 				<!-- //订单号 -->
-				<th>${orders.onum}</th>
+				<td>${orders.onum}</td>
 				<!-- 床位编号 -->
-				<th>${orders.actualpay }</th>
+				<td>${orders.actualpay }</td>
 				<!-- 支付金额 -->
-				<th>${orders.actualpay }</th>
+				<td>${orders.actualpay }</td>
 				<!-- 支付状态 -->
-				<th>${orders.paystatus }</th>
+				<td>${orders.paystatus }</td>
 				<!-- 下单时间 -->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.ordertime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--归还时间-->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.returntime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--支付时间-->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.paytime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--所属医院-->
-				<th></th>
+				<td>
+					${orders.bed.hospitaiAdministrative.hospital.hname }
+				</td>
 				<!--所属科室-->
-				<th></th>
+				<td>
+					${orders.bed.hospitaiAdministrative.administrative.aname }
+				</td>
 				<!--用户手机号-->
-				<th>${orders.cid }</th>
+				<td>${orders.cid }</td>
 				<!--订单状态-->
-				<th>${orders.orderstatus }</th>				
-				<th>
-				<a href="findById?oid=${orders.oid }">详情</a>
-				|
-				<a href="deleteById?oid=${orders.oid }">删除</a>
-				</th>
+				<td>${orders.orderstatus }</td>				
+				<td>
+					<a href="findById?oid=${orders.oid }">详情</a>
+					|
+					<a href="${orders.isdelete==1?'revoke':'delete' }?oid=${orders.oid }">
+						${orders.isdelete==1?'恢复':'删除' }
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

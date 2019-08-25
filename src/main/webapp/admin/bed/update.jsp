@@ -40,6 +40,7 @@
 			
 		}
 	function fillA(index){
+			$("#a").empty();
 			for(var i=0;i<hs.length;i++){
 				if(hs[i].hid==index){
 					as =hs[i].administrative;
