@@ -16,16 +16,16 @@
 		<TD>租用时长</TD>
 	</TR>
 
-	<c:forEach items="${customer.orders}" var="orders">
+	<c:forEach items="${customer.orders}" var="orders" varStatus="i">
 		<TR>
 			<TD>${orders.onum}</TD>
 			<TD>${orders.bed.bnum}</TD>
-			<TD>${orders.bed.fkid}</TD>
-			<TD>${orders.bed.fkid}</TD>
+			<TD>${orders.bed.hospitaiAdministrative.hospital.hname}</TD>
+			<TD>${orders.bed.hospitaiAdministrative.administrative.aname}</TD>
 			<TD>${orders.actualpay}</TD>
 			<TD><f:formatDate value="${orders.ordertime}"
 					pattern="yyyy-MM-dd hh:mm:ss" /></TD>
-			<TD>${orders.onum}</TD>
+			<TD>${times[i.index]}</TD>
 		</TR>
 	</c:forEach>
 </TABLE>

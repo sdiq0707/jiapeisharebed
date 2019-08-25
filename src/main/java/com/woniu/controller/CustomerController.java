@@ -1,5 +1,6 @@
 package com.woniu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,14 +10,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.woniu.entity.Customer;
+import com.woniu.entity.Orders;
 import com.woniu.service.ICustomerService;
+import com.woniu.util.timedif.TimeDifference;
 
 @Controller
 @RequestMapping("/admin/customer")
 public class CustomerController {
 	@Resource
 	private ICustomerService customerServiceImpl;
-	
+	@Resource
+	private TimeDifference timeDifference;
 //	@RequestMapping("findAll")
 //	public String findAll(ModelMap map) {
 //		List<Customer> list = customerServiceImpl.findAll();
@@ -46,16 +50,28 @@ public class CustomerController {
 	}
 	@RequestMapping("findByIdDetail")
 	public String findByIdDetail(Integer cid,ModelMap map) {
-		Customer customer=customerServiceImpl.findById(cid);
-	System.out.println(customer);
-		map.put("customer", customer);
+		this.findOne(cid, map);
 		return "admin/customer/detail";
 	}
 	@RequestMapping("findById")
 	public String findById(Integer cid,ModelMap map) {
-		Customer customer=customerServiceImpl.findById(cid);
-		map.put("customer", customer);
+		this.findOne(cid, map);
 		return "admin/customer/update";
+	}
+	private void findOne(Integer cid,ModelMap map) {
+		Customer customer=customerServiceImpl.findById(cid);
+		List<String> times = new ArrayList<String>();
+		List<Orders> orders = customer.getOrders();
+		if(orders!=null) {
+			for (Orders ord : orders) {
+				if(ord.getOrdertime()!=null && ord.getReturntime()!=null) {
+					String time = timeDifference.getTimeDifference(ord.getReturntime(), ord.getOrdertime());
+					times.add(time);
+				}
+			}
+		}
+		map.put("times", times);
+		map.put("customer", customer);
 	}
 	@RequestMapping("update")
 	public String update(Customer customer) {

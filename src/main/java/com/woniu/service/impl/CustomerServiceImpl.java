@@ -16,7 +16,6 @@ import com.woniu.service.ICustomerService;
 public class CustomerServiceImpl implements ICustomerService {
 	@Resource
 	private CustomerMapper customerMapper;
-	
 	@Override
 	public List<Customer> findAll(Customer customer) {
 		CustomerExample example = new CustomerExample();
