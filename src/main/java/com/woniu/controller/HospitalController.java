@@ -18,6 +18,7 @@ import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Province;
 import com.woniu.entity.Role;
+import com.woniu.entity.Userinfo;
 import com.woniu.service.impl.HospitalServiceImpl;
 import com.woniu.service.impl.ProvinceServiceImpl;
 
@@ -116,7 +117,6 @@ public class HospitalController {
 	@RequestMapping("findAll")
 	public @ResponseBody Map findAll(PageBean pageBean) {
 		List hospitalList = hospitalService.findAll(pageBean);
-		System.out.println(hospitalList);
 		Map map = new HashMap();
 		map.put("total", pageBean.getCount());
 		map.put("rows", hospitalList);
@@ -155,5 +155,15 @@ public class HospitalController {
 	public @ResponseBody List findProvince() throws Exception {
 		List<Province> list = provinceService.findAll();
 		return list;
+	}
+	
+	@RequestMapping("findProvince2")
+	public @ResponseBody Map findProvince2() throws Exception {
+		Map map=new HashMap();
+		List<Province> list = provinceService.findAll();
+		List<Userinfo> list2 = hospitalService.findHospitalManager(1005);
+		map.put("plist", list);
+		map.put("hlist", list2);
+		return map;
 	}
 }

@@ -11,6 +11,11 @@ public class Userinfo {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+	@Override
+	public String toString() {
+		return "Userinfo [uid=" + uid + ", uname=" + uname + ", upass=" + upass + ", phone=" + phone + ", isdelete="
+				+ isdelete + ", wechat=" + wechat + ", email=" + email + ", pid=" + pid + "]";
+	}
 	private List<Tree> trees;
 	public List<Tree> getTrees() {
 		return trees;

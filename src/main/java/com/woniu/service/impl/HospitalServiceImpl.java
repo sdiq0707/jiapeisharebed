@@ -79,6 +79,7 @@ public class HospitalServiceImpl implements IHospitalService{
 		if(pid!=null) {
 			criteria.andPidEqualTo(pid);
 			List<Userinfo> list=userinfoMapper.selectByExample(ue);
+			System.out.println(list);
 			return list;
 		}else {
 			return null;

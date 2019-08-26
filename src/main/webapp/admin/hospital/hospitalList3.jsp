@@ -194,8 +194,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 		</div>
 		所属县：<input type="text" name="country" /><br/>
-		医院对接人：<SELECT id="" NAME="">
-						<option></option>
+		医院对接人：<SELECT id="hs" NAME="hresper">
+						<option v-for="h in persons">{}</option>
 				</SELECT><br/>
 		医院租金：<input type="text" name="rent" /><br/>
 		医院账户：<input type="text" name="account" /><br/>
@@ -212,6 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            json:'',
 	            citys:'',
 	            zones:''
+	            
 	   	    },
 	        mounted:function(){
 	        	this.fillP();
@@ -220,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        	fillP:function(){
 	            	this.$http({
 	                	method:'post',
-	                	url:'findProvince',
+	                	url:'findProvince2',
 	                	emulateJSON:true, 
 	                	params:{
 	                	},	
