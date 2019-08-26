@@ -4,16 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>佳陪后台管理系统</title>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h3>欢迎你们进入佳陪后台系统</h3>
+<h3>欢迎进入佳陪后台系统</h3>
 <hr>
 <form action="login" method="post">
-	uname:<input type="text" name="uname">
-	upass:<input type="password" name="upass">
-	<input type="submit" value="登录">
-	<input type="reset" value="重置">
+	uname:<input type="text" name="uname"><br/>
+	upass:&nbsp;&nbsp;<input type="password" name="upass"><br/>
+	<button type="submit" class="btn btn-info">登陆</button>
+	<button type="reset" class="btn btn-danger">重置</button>
 </form>
 </body>
 </html>

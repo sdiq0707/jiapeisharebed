@@ -14,8 +14,8 @@
   </resultMap>
   <select id="findByHid" resultMap="BaseResultMap">
   	SELECT * from administrative where aid in(
-	SELECT hospitaladministrative.aid from hospitaladministrative WHERE hid=${hid} and administrative.aid=hospitaladministrative.aid
-)
+		SELECT hospitaladministrative.aid from hospitaladministrative WHERE hid=${hid} and administrative.aid=hospitaladministrative.aid
+	)
   </select>
   <select id="findByFkId" resultMap="BaseResultMap">
   	select a.* from administrative a,hospitaladministrative b where a.aid=b.aid and fk_id='${fk_id}';

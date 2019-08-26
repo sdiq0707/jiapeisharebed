@@ -69,19 +69,19 @@
 	<input type="submit" value="条件查询">
 </form>
 <a href="goInput" class="btn btn-primary">新增</a>
-<table class="table table-striped" >
+<table class="table table-striped" class="table text nowrap">
 <tr>
 	<td>床位ID</td>
-	<td>生产厂家ID</td>
+	<td>厂家ID</td>
 	<td>股东ID</td>
-	<td>床位编号</td>
-	<td>生产厂家</td>
-	<td>生产厂家联系人</td>
-	<td>生产厂家电话</td>
+	<td>编号</td>
+	<td>厂家</td>
+	<td>厂家联系人</td>
+	<td>厂家电话</td>
 	<td>状态</td>
 	<td>是否故障</td>
 	<td>是否删除</td>
-	<td>所属医院科室编号</td>
+	<td>所属编号</td>
 	<td>所属医院</td>
 	<td>所属科室</td>
 	<td>编辑</td>

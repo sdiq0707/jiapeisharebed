@@ -18,6 +18,7 @@ import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Province;
 import com.woniu.entity.Role;
+import com.woniu.entity.Userinfo;
 import com.woniu.service.impl.HospitalServiceImpl;
 import com.woniu.service.impl.ProvinceServiceImpl;
 
@@ -28,16 +29,24 @@ public class HospitalController {
 	private HospitalServiceImpl hospitalService;
 	@Resource
 	private ProvinceServiceImpl provinceService;
+	
+	@RequestMapping("save2")
+	public @ResponseBody Message save2(Hospital hospital) {
+		Message msg=null;
+		try {
+			hospitalService.save(hospital);
+			msg=new Message(true,"医院添加成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			msg = new Message(false, "医院添加失败"+e.getMessage());
+		}
+		return msg;
 
-	/*
-	 * @RequestMapping("save") public String save(Hospital hospital) {
-	 * hospitalService.save(hospital); return "redirect:findAll";
-	 * 
-	 * }
-	 */
+	}
 	
 	@RequestMapping("save")
 	public @ResponseBody Message save(Hospital hospital) {
+		
 		Message msg=null;
 		try {
 			hospitalService.save(hospital);
@@ -85,12 +94,18 @@ public class HospitalController {
 	}
 
 	@RequestMapping("update")
-	public String update(Hospital hospital) {
-		hospitalService.update(hospital);
-		return "redirect:findAll";
+	public @ResponseBody Message update(Hospital hospital) {
+		Message msg=null;
+		try {
+			hospitalService.update(hospital);
+			msg=new Message(true,"医院修改成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			msg = new Message(false, "医院修改失败"+e.getMessage());
+		}
+		return msg;
 
 	}
-
 	@RequestMapping("goUpdate")
 	public String update(Integer hid, ModelMap map) {
 		Hospital hospital = hospitalService.findOne(hid);
@@ -109,12 +124,26 @@ public class HospitalController {
 
 	}
 
-	@RequestMapping("findOne")
-	public @ResponseBody Hospital findOne(Integer hid) {
+	@RequestMapping("findById")
+	public @ResponseBody Hospital findById(Integer hid) {
 		Hospital hospital = hospitalService.findOne(hid);
+		System.out.println(hospital);
 		return hospital;
 
 	}
+	
+	@RequestMapping("findByName")
+	public @ResponseBody Map findByName(PageBean pageBean,String hname) {
+		System.out.println(hname);
+		List hospitalList = hospitalService.findByName(pageBean,hname);
+		System.out.println(hospitalList);
+		Map map = new HashMap();
+		map.put("total", pageBean.getCount());
+		map.put("rows", hospitalList);
+		return map;
+
+	}
+	
 
 	@RequestMapping("goSave")
 	public String goInput(ModelMap map) {
@@ -126,5 +155,15 @@ public class HospitalController {
 	public @ResponseBody List findProvince() throws Exception {
 		List<Province> list = provinceService.findAll();
 		return list;
+	}
+	
+	@RequestMapping("findProvince2")
+	public @ResponseBody Map findProvince2() throws Exception {
+		Map map=new HashMap();
+		List<Province> list = provinceService.findAll();
+		List<Userinfo> list2 = hospitalService.findHospitalManager(1005);
+		map.put("plist", list);
+		map.put("hlist", list2);
+		return map;
 	}
 }

@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Administrative;
+import com.woniu.entity.AdministrativeExample;
+import com.woniu.entity.AdministrativeExample.Criteria;
+import com.woniu.entity.Hospitaladministrative;
 import com.woniu.entity.HospitaladministrativeExample;
-import com.woniu.entity.HospitaladministrativeKey;
+import com.woniu.entity.PageBean;
 import com.woniu.mapper.AdministrativeMapper;
 import com.woniu.mapper.HospitaladministrativeMapper;
 import com.woniu.service.IAdministrativeService;
@@ -22,20 +26,16 @@ public class AdministrativeServiceImpl implements IAdministrativeService {
 	private HospitaladministrativeMapper hospitaladministrativeMapper;
 	
 	@Override
-	public void save(Administrative administrative,Integer[] opt) {
-		// TODO Auto-generated method stub
+	public void save(Administrative administrative,Integer hid) {
 		//增加administrative
 		administrativeMapper.insert(administrative);
 		//增加Hospitaladministrative
-		if(opt!=null) {
-			for (Integer hid : opt) {
-				HospitaladministrativeKey key=new HospitaladministrativeKey();
-				key.setAid(administrative.getAid());
-				key.setHid(hid);
-				hospitaladministrativeMapper.insertSelective(key);
-			}
+			Hospitaladministrative key=new Hospitaladministrative();
+			key.setAid(administrative.getAid());
+			key.setHid(hid);
+			key.setFkId(administrative.getAid()+"X"+hid);
+			hospitaladministrativeMapper.insertSelective(key);
 		}
-	}
 
 	@Override
 	public void revoke(Integer aid) {
@@ -56,7 +56,7 @@ public class AdministrativeServiceImpl implements IAdministrativeService {
 	}
 
 	@Override
-	public void update(Administrative administrative,Integer[] opt) {
+	public void update(Administrative administrative,Integer hid) {
 		// TODO Auto-generated method stub
 		//修改administrative
 		administrativeMapper.updateByPrimaryKey(administrative);
@@ -65,26 +65,40 @@ public class AdministrativeServiceImpl implements IAdministrativeService {
 		example.createCriteria().andAidEqualTo(administrative.getAid());
 		hospitaladministrativeMapper.deleteByExample(example);
 		//增加Hospitaladministrative
-		if(opt!=null) {
-			for (Integer hid : opt) {
-				HospitaladministrativeKey key=new HospitaladministrativeKey();
-				key.setAid(administrative.getAid());
-				key.setHid(hid);
-				hospitaladministrativeMapper.insertSelective(key);
-			}
-		}
+		Hospitaladministrative key=new Hospitaladministrative();
+		key.setAid(administrative.getAid());
+		key.setHid(hid);
+		key.setFkId(hid+"X"+administrative.getAid());
+		hospitaladministrativeMapper.insertSelective(key);
 	}
 
 	@Override
 	public Administrative findOne(Integer aid) {
-		// TODO Auto-generated method stub
-		return administrativeMapper.selectByPrimaryKey(aid);
+		Administrative administrative = administrativeMapper.selectByPrimaryKey(aid);
+		return administrative;
 	}
 
 	@Override
-	public List<Administrative> findAll() {
-		// TODO Auto-generated method stub
-		return administrativeMapper.selectByExample(null);
+	public List<Administrative> findAll(Administrative administrative,PageBean pageBean) {
+		AdministrativeExample example=new AdministrativeExample();
+		 Criteria c = example.createCriteria();
+		if(administrative.getAid()!=null&&!administrative.getAname().equals(""))
+			c.andAidEqualTo(administrative.getAid());
+		
+		List list = administrativeMapper.selectByExample(example,new RowBounds(pageBean.getOffset(),pageBean.getLimit()));
+		int count = administrativeMapper.countByExample(example);
+		pageBean.setCount(count);
+		return list;
+	}
+
+	@Override
+	public List<Administrative> findByAname(Administrative administrative,String aname) {
+		AdministrativeExample example=new AdministrativeExample();
+		 Criteria c = example.createCriteria();
+		 if(administrative.getAid()!=null&&!administrative.getAname().equals(""))
+			 c.andAnameEqualTo(administrative.getAname());
+		 List<Administrative> list = administrativeMapper.selectByExample(example, null);
+		return list;
 	}
 
 }

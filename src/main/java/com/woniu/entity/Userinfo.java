@@ -3,12 +3,18 @@ package com.woniu.entity;
 import java.util.List;
 
 public class Userinfo {
+	
 	private List<Role> roles;
 	public List<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+	@Override
+	public String toString() {
+		return "Userinfo [uid=" + uid + ", uname=" + uname + ", upass=" + upass + ", phone=" + phone + ", isdelete="
+				+ isdelete + ", wechat=" + wechat + ", email=" + email + ", pid=" + pid + "]";
 	}
 	private List<Tree> trees;
 	public List<Tree> getTrees() {

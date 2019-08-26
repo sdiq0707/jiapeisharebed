@@ -136,6 +136,10 @@ public class BedController {
 			}
 		}
 		map.put("beds", beds);
+		List<Shareholder> shareholders=shareholderServiceImpl.findAll();
+		map.put("shareholders", shareholders);
+		List<Factory> factorys=factoryServiceImpl.findAll();
+		map.put("factorys", factorys);
 		return "/admin/bed/list";
 	}
 }
