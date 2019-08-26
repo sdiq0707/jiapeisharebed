@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.woniu.entity.Hospital;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Trouble;
+import com.woniu.entity.TroubleSearchExample;
 import com.woniu.mapper.TroubleMapper;
 import com.woniu.service.ITroubleService;
 
@@ -60,6 +61,12 @@ public class TroubleServiceImpl implements ITroubleService {
 	@Override
 	public void update(Trouble trouble) {
 		mapper.updateByPrimaryKey(trouble);
+	}
+
+	@Override
+	public List search(TroubleSearchExample example) {
+		List<Trouble> search = mapper.search(example);
+		return search;
 	}
 
 

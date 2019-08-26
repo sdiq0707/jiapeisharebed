@@ -14,14 +14,18 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Trouble;
+import com.woniu.entity.TroubleSearchExample;
 import com.woniu.service.IBedService;
+import com.woniu.service.IHospitalService;
 import com.woniu.service.ITroubleService;
 
 @RestController
@@ -31,9 +35,14 @@ public class TroubleController {
 	private ITroubleService troubleServiceImpl;
 	@Resource
 	private IBedService bedServiceImpl;
+	@Resource
+	private IHospitalService hospitalServiceImpl;
+	
+	
 	
 	@RequestMapping("save")
 	public Message save(Trouble trouble) {
+		System.out.println(trouble);
 		Message msg = new Message(true, "");
 		try {
 			troubleServiceImpl.save(trouble);
@@ -68,6 +77,7 @@ public class TroubleController {
 		List beds = bedServiceImpl.findAll();
 		return beds;
 	}
+	
 @InitBinder
  public void initBinder(WebDataBinder binder, WebRequest request) {
       DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -75,6 +85,7 @@ public class TroubleController {
   }
 	@RequestMapping("updateById")
 	public Message update(Trouble trouble) {
+		System.out.println(trouble);
 		Message msg = new Message(true, "");
 		try {
 			troubleServiceImpl.update(trouble);
@@ -87,6 +98,16 @@ public class TroubleController {
 		}finally {
 			return msg;
 		}
+	}
+	
+	@RequestMapping("search")
+	public Map search( TroubleSearchExample example) {
+		System.out.println("search=======================================");
+		System.out.println(example.getHospital());
+		List troubles = troubleServiceImpl.search(example);
+		Map map = new HashMap();
+		map.put("rows", troubles);
+		return map;
 	}
 	
 	@RequestMapping("deleteById")
@@ -119,5 +140,11 @@ public class TroubleController {
 		}finally {
 			return msg;
 		}
+	}
+	
+	@RequestMapping("findAllHospital")
+	public List findAllHospital() {
+		List hospitaleds = hospitalServiceImpl.findAll();
+		return hospitaleds;
 	}
 }
