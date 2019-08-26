@@ -16,23 +16,9 @@ import com.woniu.service.ICustomerService;
 public class CustomerServiceImpl implements ICustomerService {
 	@Resource
 	private CustomerMapper customerMapper;
-	
 	@Override
 	public List<Customer> findAll(Customer customer) {
-		CustomerExample example = new CustomerExample();
-		Criteria c = example.createCriteria();
-		if(customer.getPhone()!=null && !customer.getPhone().equals("")) {
-			c.andPhoneEqualTo(customer.getPhone());
-		}
-		if(customer.getSex()!=null && !customer.getSex().equals("")) {
-			c.andSexEqualTo(customer.getSex());
-		}
-		if(customer.getRegtime()!=null && !customer.getRegtime().equals("")) {
-			c.andRegtimeEqualTo(customer.getRegtime());
-		}
-		
-		List<Customer> list = customerMapper.selectByExample(example);
-		
+		List<Customer> list = customerMapper.selectByExample(this.getExample(customer));
 		return list;
 	}
 
@@ -62,6 +48,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public Integer findAllCount(Customer customer) {
+		return customerMapper.countByExample(this.getExample(customer));//查找用户总数
+	}
+	private CustomerExample getExample(Customer customer) {
 		CustomerExample example = new CustomerExample();
 		Criteria c = example.createCriteria();
 		if(customer.getPhone()!=null && !customer.getPhone().equals("")) {
@@ -70,10 +59,10 @@ public class CustomerServiceImpl implements ICustomerService {
 		if(customer.getSex()!=null && !customer.getSex().equals("")) {
 			c.andSexEqualTo(customer.getSex());
 		}
-		if(customer.getRegtime()!=null && !customer.getRegtime().equals("")) {
-			c.andRegtimeEqualTo(customer.getRegtime());
+		if(customer.getTime1()!=null && customer.getTime2()!=null) {
+			c.andRegtimeBetween(customer.getTime1(), customer.getTime2());
 		}
-		return customerMapper.countByExample(example);//查找用户总数
+		return example;
 	}
 
 }
