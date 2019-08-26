@@ -2,7 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +29,19 @@
 
 	function fillP(){
 			$.each(hs,function(i,item){
-					$("#h").append("<option value="+i+">"+item.hname+"</option>");
+					$("#h").append("<option value="+item.hid+">"+item.hname+"</option>");
 				});
-				fillA(0);
+				fillA(1);
 		}
 		function fillA(index){
 				$("#a").empty();
-				as = hs[index].administrative;
+				for(var i=0;i<hs.length;i++){
+						if(hs[i].hid==index){
+							as =hs[i].administrative;
+							}
+					}
 				$.each(as,function(i,item){
-					$("#a").append("<option value="+i+">"+item.aname+"</option>");
+					$("#a").append("<option value="+item.aid+">"+item.aname+"</option>");
 				});
 			}
 </script>

@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.woniu.entity.Customer;
-import com.woniu.entity.Orders;
 import com.woniu.service.ICustomerService;
 
 @Controller
@@ -18,11 +17,21 @@ public class CustomerController {
 	@Resource
 	private ICustomerService customerServiceImpl;
 	
+//	@RequestMapping("findAll")
+//	public String findAll(ModelMap map) {
+//		List<Customer> list = customerServiceImpl.findAll();
+//		Integer count = customerServiceImpl.findAllCount();
+//		map.put("list", list);
+//		map.put("count", count);
+//		return "admin/customer/list";
+//	}
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {
-		List<Customer> list = customerServiceImpl.findAll();
+	public String findAll(Customer customer,ModelMap map) {
+		List<Customer> list = customerServiceImpl.findAll(customer);
+		Integer count = customerServiceImpl.findAllCount(customer);
 		map.put("list", list);
-		map.put("mes", null);
+		map.put("count", count);
+		map.put("customer", customer);
 		return "admin/customer/list";
 	}
 	@RequestMapping("delete")
@@ -38,6 +47,7 @@ public class CustomerController {
 	@RequestMapping("findByIdDetail")
 	public String findByIdDetail(Integer cid,ModelMap map) {
 		Customer customer=customerServiceImpl.findById(cid);
+	System.out.println(customer);
 		map.put("customer", customer);
 		return "admin/customer/detail";
 	}

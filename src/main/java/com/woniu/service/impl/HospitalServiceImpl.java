@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Hospital;
+import com.woniu.entity.PageBean;
 import com.woniu.entity.Province;
 import com.woniu.mapper.HospitalMapper;
 import com.woniu.mapper.ProvinceMapper;
@@ -37,8 +39,10 @@ public class HospitalServiceImpl implements IHospitalService{
 	}
 
 	@Override
-	public List<Hospital> findAll() {
-		List<Hospital> list = hospitalMapper.selectByExample(null);
+	public List<Hospital> findAll(PageBean pageBean) {
+		List<Hospital> list = hospitalMapper.selectByExample(null,new RowBounds(pageBean.getOffset(),pageBean.getLimit()));
+		int count=hospitalMapper.countByExample(null);
+		pageBean.setCount(count);
 		return list;
 		
 	}
@@ -47,6 +51,14 @@ public class HospitalServiceImpl implements IHospitalService{
 	public Hospital findOne(Integer hid) {
 		Hospital hospital = hospitalMapper.selectByPrimaryKey(hid);
 		return hospital;
+		
+	}
+
+	@Override
+	public List<Hospital> findAll() {
+		List<Hospital> list = hospitalMapper.selectByExample(null);
+		int count=hospitalMapper.countByExample(null);
+		return list;
 		
 	}
 

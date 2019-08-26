@@ -12,9 +12,9 @@ public class OrderSelect implements Serializable{
 	//订单编号
 	private String onum;
 	//医院id
-	private Integer hid;
+	private Integer hid=null;
 	//科室id
-	private Integer aid; 
+	private Integer aid=null; 
 	//订单状态
 	private Integer status; 
 	//开始时间

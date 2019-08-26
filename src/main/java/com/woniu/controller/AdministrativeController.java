@@ -93,7 +93,7 @@ public class AdministrativeController {
 	}
 	
 	@RequestMapping("save")
-	public String save(Administrative administrative,Integer hid,Hospital hospital,Hospitaladministrative hospitaladministrative) {
+	public String save(Administrative administrative,Integer hid) {
 		administrativeServiceImpl.save(administrative,hid);
 		return "/admin/administrative/list2";
 	}

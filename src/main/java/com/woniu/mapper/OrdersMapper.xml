@@ -20,13 +20,13 @@
     <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
     <result column="orderstatus" property="orderstatus" jdbcType="INTEGER" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
-    <collection property="bed" column="oid" select="com.woniu.mapper.BedMapper.findByOid"></collection>
+    <collection property="bed" column="oid" select="com.woniu.mapper.BedMapper.findByOid" />
   </resultMap>
   
   <select id="findByCid" resultMap="BaseResultMap">
   	SELECT * FROM orders o WHERE EXISTS (
-		SELECT o.cid FROM customer c
-		WHERE o.cid=#{cid})
+		SELECT c.cid FROM customer c
+		WHERE c.cid=#{cid} AND c.cid=o.cid)
   </select>
   
   <sql id="Example_Where_Clause" >

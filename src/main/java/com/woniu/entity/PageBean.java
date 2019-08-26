@@ -2,6 +2,7 @@ package com.woniu.entity;
 
 public class PageBean {
 
+
 	private Integer offset;//从哪里开始
 	private Integer limit=10;//取几条数据
 	private Integer pageNow=1;//当前页
@@ -38,6 +39,4 @@ public class PageBean {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	
-	
 }

@@ -22,9 +22,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<!-- <button id="save" class="btn btn-success" >增加科室</button> -->
 <h3>科室信息</h3>	
-	<a href='goSave'>增加科室</a>
+<button id="save" class="btn btn-success" >增加科室</button>
 	<form action="searchByAid" method="post">
 		<font color="red" size="5">aid:</font><input type="text" name="aid"  placeholder="请输入科室编号"/>
 		<input type="submit" value="检索"/>
@@ -126,8 +125,7 @@ window.onload = function(){
 					this.get();
 				},
 				findById:function(aid){
-					alert(aid);
-					window.location.href ="<%=basePath%>admin/administrative/save.jsp?aid="+aid;
+					window.location.href ="<%=basePath%>admin/administrative/update.jsp?aid="+aid;
 				}
 			}
 		});

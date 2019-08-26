@@ -2,6 +2,7 @@ package com.woniu.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,16 +10,24 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.woniu.entity.Administrative;
+import com.woniu.entity.Hospital;
 import com.woniu.entity.OrderSelect;
 import com.woniu.entity.Orders;
 import com.woniu.entity.OrdersExample;
 import com.woniu.entity.OrdersExample.Criteria;
+import com.woniu.mapper.BedMapper;
+import com.woniu.mapper.HospitalMapper;
 import com.woniu.mapper.OrdersMapper;
 import com.woniu.service.IOrdersService;
 @Service
 public class OrdersServiceImpl implements IOrdersService {
 	@Resource
 	private OrdersMapper ordersMapper;
+	@Resource
+	private HospitalMapper hospitalMapper;
+	@Resource
+	private BedMapper bedmMapper;
 	@Override
 	public void addOrders(Orders order) {
 		// TODO Auto-generated method stub
@@ -65,9 +74,23 @@ public class OrdersServiceImpl implements IOrdersService {
 		}
 		criteria.andOrdertimeBetween(btime, etime);
 		
-		//根据医院查找
-		//criteria.andBidIn(values);
-		//根据科室查找
+		//根据医院查找和科室查找
+		if(orderSelect.getHid()!=null&&orderSelect.getAid()==null) {
+			List<Integer> list1 = bedmMapper.selectByHid(orderSelect.getHid());
+			if(list1.size()==0)
+				return new ArrayList<>();
+			criteria.andBidIn(list1);
+		}
+		if(orderSelect.getHid()!=null&&orderSelect.getAid()!=null) {
+			System.out.println(orderSelect.toString());
+			
+			List<Integer> list = bedmMapper.selectByHandA(orderSelect.getHid(), orderSelect.getAid());		
+			System.out.println(list);
+			if(list.size()==0)
+				return new ArrayList<>();
+			criteria.andBidIn(list);
+			
+		}
 		return ordersMapper.selectByExample(example);
 	}
 
@@ -91,6 +114,14 @@ public class OrdersServiceImpl implements IOrdersService {
 	public Orders findById(Integer oid) {
 		// TODO Auto-generated method stub
 		return ordersMapper.selectByPrimaryKey(oid);
+	}
+
+	@Override
+	public void revokeByID(Integer oid) {
+		// TODO Auto-generated method stub
+		Orders orders=ordersMapper.selectByPrimaryKey(oid);//软删除，把isdelete设置为0
+		orders.setIsdelete(0);
+		ordersMapper.updateByPrimaryKey(orders);
 	}
 
 }

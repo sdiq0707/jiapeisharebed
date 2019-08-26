@@ -1,5 +1,6 @@
 package com.woniu.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Trouble {
@@ -267,8 +268,9 @@ public class Trouble {
      *
      * @mbggenerated Mon Aug 19 15:25:36 CST 2019
      */
-    public Date getTdeclaretime() {
-        return tdeclaretime;
+    public String getTdeclaretime() {
+    	SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+        return fmt.format(tdeclaretime);
     }
 
     /**

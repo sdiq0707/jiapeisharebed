@@ -1,10 +1,21 @@
 package com.woniu.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Customer {
+public class Customer implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String toString() {
+		return "Customer [orders=" + orders + ", cid=" + cid + ", cname=" + cname + ", phone=" + phone + ", sex=" + sex
+				+ ", cpass=" + cpass + ", cnickname=" + cnickname + ", regtime=" + regtime + ", isdeposit=" + isdeposit
+				+ ", balance=" + balance + ", ordertimes=" + ordertimes + ", sumconsume=" + sumconsume + ", isdelete="
+				+ isdelete + "]";
+	}
+
 	private List<Orders> orders;
 	
 	public List<Orders> getOrders() {

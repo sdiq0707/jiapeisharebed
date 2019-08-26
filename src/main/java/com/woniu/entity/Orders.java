@@ -431,10 +431,10 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "Orders [oid=" + oid + ", onum=" + onum + ", bid=" + bid + ", actualpay=" + actualpay + ", paystatus="
-				+ paystatus + ", ordertime=" + ordertime + ", returntime=" + returntime + ", isunusual=" + isunusual
-				+ ", unusualtype=" + unusualtype + ", cid=" + cid + ", paytime=" + paytime + ", orderstatus="
-				+ orderstatus + ", isdelete=" + isdelete + "]";
+		return "Orders [bed=" + bed + ", oid=" + oid + ", onum=" + onum + ", bid=" + bid + ", actualpay=" + actualpay
+				+ ", paystatus=" + paystatus + ", ordertime=" + ordertime + ", returntime=" + returntime
+				+ ", isunusual=" + isunusual + ", unusualtype=" + unusualtype + ", cid=" + cid + ", paytime=" + paytime
+				+ ", orderstatus=" + orderstatus + ", isdelete=" + isdelete + "]";
 	}
-    
+
 }

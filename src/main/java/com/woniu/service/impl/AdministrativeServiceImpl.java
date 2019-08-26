@@ -27,16 +27,14 @@ public class AdministrativeServiceImpl implements IAdministrativeService {
 	
 	@Override
 	public void save(Administrative administrative,Integer hid) {
-		
-		// TODO Auto-generated method stub
 		//增加administrative
 		administrativeMapper.insert(administrative);
 		//增加Hospitaladministrative
-				Hospitaladministrative key=new Hospitaladministrative();
-				key.setAid(administrative.getAid());
-				key.setHid(hid);
-				key.setFkId(administrative.getAid()+"X"+hid);
-				hospitaladministrativeMapper.insertSelective(key);
+			Hospitaladministrative key=new Hospitaladministrative();
+			key.setAid(administrative.getAid());
+			key.setHid(hid);
+			key.setFkId(administrative.getAid()+"X"+hid);
+			hospitaladministrativeMapper.insertSelective(key);
 		}
 
 	@Override

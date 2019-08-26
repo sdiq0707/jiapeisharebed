@@ -25,13 +25,9 @@
   <select id="findById" resultMap="BaseResultMapWithOrders">
   	select * from customer where cid=#{cid}
   </select>
-  <resultMap id="BaseResultMapWithOrders" type="com.woniu.entity.Customer" >
+  <resultMap id="BaseResultMapWithOrders" extends="BaseResultMap" type="com.woniu.entity.Customer" >
   	<collection property="orders" column="cid" select="com.woniu.mapper.OrdersMapper.findByCid" />
   </resultMap>
-  
-  <!-- <resultMap id="BaseResultMapWithOrders" type="com.woniu.entity.Customer" >
-  	<collection property="orders" column="cid" select="com.woniu.mapper.OrdersMapper.findByCid"></collection>
-  </resultMap> -->
   
   <sql id="Example_Where_Clause" >
     <!--
