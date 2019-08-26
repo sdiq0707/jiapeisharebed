@@ -25,7 +25,6 @@ public class HospitalServiceImpl implements IHospitalService{
 		hospitalMapper.insertSelective(hospital);
 		
 	}
-
 	@Override
 	public void update(Hospital hospital) {
 		System.out.println(hospital);
