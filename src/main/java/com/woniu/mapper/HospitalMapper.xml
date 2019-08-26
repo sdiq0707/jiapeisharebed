@@ -18,6 +18,14 @@
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
     <collection property="administrative" column="hid" select="com.woniu.mapper.AdministrativeMapper.findByHid"></collection>
   </resultMap>
+  
+  <select id="findByTid" resultType="java.lang.String">
+  	SELECT hname FROM hospital WHERE hid = 
+	(SELECT hid FROM hospitaladministrative WHERE fk_id = 
+	(SELECT fkid FROM bed WHERE bid =
+	(SELECT bid FROM trouble WHERE tid = #{tid })))
+  </select>
+  
   <select id="findByAid" resultMap="BaseResultMap">
 	SELECT * from administrative a where EXISTS(
 		SELECT aid from hospitaladministrative where hid=#{hid} and aid=a.aid
