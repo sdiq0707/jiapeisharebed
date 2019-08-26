@@ -24,12 +24,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <form id="selectForm" width="100%">
+    故障号：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="tid" style="width:300px">
     故障状态：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="tstatus" style="width:300px">
     故障类型：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="ttype" style="width:300px">
     所属医院：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="hospital" style="width:300px"><br>
     最早时间：<input  type="text" name="startTime" class="easyui-datebox" required="required" data-options="iconCls:'icon-search'"/><br/>
     最近时间：<input  type="text" name="endTime" class="easyui-datebox" required="required" data-options="iconCls:'icon-search'"/><br/>
-<button type="button" onclick="changedata()" >搜索</button>
+    <button type="button" onclick="changedata()" >搜索</button>
 </form>
 
 <table id="dg"></table>
@@ -45,6 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form id="form" method="post">
         <input hidden="hidden" name="tid">
         故障标题：<input type="text" name="ttitle"/><br/>
+        故障号：<input type="text" name="tid"/><br/>
         故障描述：<input type="text" name="tdescribe"/><br/>
         故障类型：<input type="text" name="ttype"/><br/>
         申报人：<input type="text" name="tdeclarant"/><br/>

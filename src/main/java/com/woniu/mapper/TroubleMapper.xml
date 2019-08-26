@@ -33,12 +33,20 @@
 			(SELECT hid FROM hospital WHERE hname = #{hospital })))
   </if>
   
+  <if test="tid != null and tid != '' ">
+	and tid = #{tid }
+  </if>
+  
   <if test="ttype != null and ttype != '' ">
 	and ttype = #{ttype }
   </if>
   
   <if test="tstatus != null and tstatus != '' ">
 	and tstatus = #{tstatus }
+  </if>
+  
+  <if test="tstatus != null and tstatus == 0 ">
+	and tstatus = 0
   </if>
   
    <if test="startTime != null and startTime != ''  and endTime != null and endTime != '' ">

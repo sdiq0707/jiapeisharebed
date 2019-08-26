@@ -5,12 +5,21 @@ import java.util.Date;
 
 public class TroubleSearchExample {
 	private Integer tstatus;
+	private Integer tid;
 	private String ttype;
 	private String hospital;
 	private String startTime;
 	private String endTime;
 	
 	
+	
+	
+	public final Integer getTid() {
+		return tid;
+	}
+	public final void setTid(Integer tid) {
+		this.tid = tid;
+	}
 	public final Integer getTstatus() {
 		return tstatus;
 	}

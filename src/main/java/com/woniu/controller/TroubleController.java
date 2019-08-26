@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import com.woniu.entity.Administrative;
+import com.woniu.entity.Bed;
+import com.woniu.entity.Hospital;
 import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Trouble;
@@ -102,7 +105,7 @@ public class TroubleController {
 	
 	@RequestMapping("search")
 	public Map search( TroubleSearchExample example) {
-		System.out.println("search=======================================");
+		System.out.println("search======================================="+example.getTstatus());
 		System.out.println(example.getHospital());
 		List troubles = troubleServiceImpl.search(example);
 		Map map = new HashMap();
@@ -147,4 +150,17 @@ public class TroubleController {
 		List hospitaleds = hospitalServiceImpl.findAll();
 		return hospitaleds;
 	}
+	
+	@RequestMapping("findBedMsg")
+	public Map findBed(Integer bid) {
+		 Bed bed = bedServiceImpl.findById(bid);
+		 String hospital = bed.getHospitaiAdministrative().getHospital().getHname();
+		 String administrative = bed.getHospitaiAdministrative().getAdministrative().getAname();
+		 Map map = new HashMap();
+		 map.put("hospital", hospital);
+		 map.put("administrative", administrative);
+		 return map;
+	}
+	
+	
 }
