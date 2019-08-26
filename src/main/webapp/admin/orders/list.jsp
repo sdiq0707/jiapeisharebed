@@ -13,7 +13,7 @@
 			global:true,
 			type:"POST",
 			async:false,
-			cache:false
+			cache:true
 		});
 	var hospitals;
 	var cs;
@@ -36,14 +36,14 @@
 	}
 	function fillA(value){	
 		$("#select-2").empty();
-
+		$("#select-2").append("<option value=\"\" selected=\"selected\">-请先选择医院-</option>");
 		$.each(hospitals,function(i,hospital){
 			var hid=hospital.hid;
 			if(hid==value){
 				cs = hospital.administrative;
 				$.each(cs,function(i,item){
 					$("#select-2").append("<option value="+item.aid+">"+item.aname+"</option>");
-				});
+			});
 			}
 		});
 		
@@ -81,6 +81,9 @@
 		<button class="button button-light" type="submit">提交</button>
 		<button type="reset">重置</button>
 	</form>
+	<div>
+		<h4>共${count }条记录</h4>
+	</div>
 	<table id="table-1" border="1">
 		<thead>
 			<tr>
@@ -102,38 +105,44 @@
 		<c:forEach items="${list }" var="orders">
 			<tr>
 				<!-- //订单号 -->
-				<th>${orders.onum}</th>
+				<td>${orders.onum}</td>
 				<!-- 床位编号 -->
-				<th>${orders.actualpay }</th>
+				<td>${orders.actualpay }</td>
 				<!-- 支付金额 -->
-				<th>${orders.actualpay }</th>
+				<td>${orders.actualpay }</td>
 				<!-- 支付状态 -->
-				<th>${orders.paystatus }</th>
+				<td>${orders.paystatus }</td>
 				<!-- 下单时间 -->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.ordertime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--归还时间-->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.returntime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--支付时间-->
-				<th>
+				<td>
 				<fmt:formatDate value="${orders.paytime }" pattern="yyyy-MM-dd hh:mm:ss"/>
-				</th>
+				</td>
 				<!--所属医院-->
-				<th></th>
+				<td>
+					${orders.bed.hospitaiAdministrative.hospital.hname }
+				</td>
 				<!--所属科室-->
-				<th></th>
+				<td>
+					${orders.bed.hospitaiAdministrative.administrative.aname }
+				</td>
 				<!--用户手机号-->
-				<th>${orders.cid }</th>
+				<td>${orders.cid }</td>
 				<!--订单状态-->
-				<th>${orders.orderstatus }</th>				
-				<th>
-				<a href="findById?oid=${orders.oid }">详情</a>
-				|
-				<a href="deleteById?oid=${orders.oid }">删除</a>
-				</th>
+				<td>${orders.orderstatus }</td>				
+				<td>
+					<a href="findById?oid=${orders.oid }">详情</a>
+					|
+					<a href="${orders.isdelete==1?'revoke':'delete' }?oid=${orders.oid }">
+						${orders.isdelete==1?'恢复':'删除' }
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

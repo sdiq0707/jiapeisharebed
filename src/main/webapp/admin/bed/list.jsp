@@ -11,7 +11,7 @@
 			global:true,
 			type:"POST",
 			async:false,
-			cache:false
+			cache:true
 		});
 	var hs;
 	var as;

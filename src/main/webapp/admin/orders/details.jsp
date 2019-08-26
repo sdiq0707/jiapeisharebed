@@ -32,8 +32,8 @@
 <HR align=center width=100% color=#987cb9 SIZE=1>
 	<h2>床位信息</h2>
 	<div class="ui-grid-b">
-		<div class="ui-block-a">所属医院</div>
-		<div class="ui-block-b">所属科室</div>
+		<div class="ui-block-a">所属医院：${orders.bed.hospitaiAdministrative.hospital.hname }</div>
+		<div class="ui-block-b">所属科室：${orders.bed.hospitaiAdministrative.administrative.aname }</div>
 		<div class="ui-block-c">床位编号：${bed.bnum }</div>
 	</div>
 <HR align=center width=100% color=#987cb9 SIZE=1>
