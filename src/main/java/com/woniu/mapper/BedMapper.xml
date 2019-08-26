@@ -32,7 +32,6 @@
 	<select id="selectByHandA" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
 	SELECT b.bid FROM bed b,hospitaladministrative ha where ha.hid=#{hid} AND ha.aid=#{aid} and b.fkid=ha.fk_id
 	</select>
-<<<<<<< HEAD
 
 
   <sql id="Example_Where_Clause">
