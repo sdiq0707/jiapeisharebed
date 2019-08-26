@@ -21,6 +21,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
+
+
+<form id="selectForm" width="100%">
+    故障状态：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="tstatus" style="width:300px">
+    故障类型：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="ttype" style="width:300px">
+    所属医院：<input class="easyui-textbox" data-options="iconCls:'icon-search'" name="hospital" style="width:300px"><br>
+    最早时间：<input  type="text" name="startTime" class="easyui-datebox" required="required" data-options="iconCls:'icon-search'"/><br/>
+    最近时间：<input  type="text" name="endTime" class="easyui-datebox" required="required" data-options="iconCls:'icon-search'"/><br/>
+<button type="button" onclick="changedata()" >搜索</button>
+</form>
+
 <table id="dg"></table>
 
 
@@ -41,7 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         故障时间：<input id="dd" type="text" name="tdeclaretime" class="easyui-datebox" required="required"/><br/>
         所属医院：
         <div id="app2">
-            <SELECT id="hos" NAME="hospital" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;">
+            <SELECT id="hos" NAME="hospital" onfocus="this.defaultIndex=this.selectedIndex;"
+                    onchange="this.selectedIndex=this.defaultIndex;">
                 <option v-for="p in json">{{p.hname}}</option>
             </SELECT>
         </div>
@@ -55,97 +67,129 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <button type="button" onclick="sub()">save</button>
         <br/>
     </form>
+    <form hidden="hidden" id="tidform" action="details.jsp">
+        <input id="tid" name="tid">
+        <button>go</button>
+    </form>
 </div>
 </body>
 </html>
 <script type="text/javascript">
     var formflag = '';
+    var searchFlag = '';
+    var columns = [[
+        {field: 'tid', title: '故障号', width: 40},
+        {field: 'ttitle', title: '故障标题', width: 100},
+        {field: 'tdescribe', title: '故障描述', width: 100, align: 'center'},
+        {field: 'ttype', title: '故障类型', width: 100, align: 'center'},
+        {field: 'hospital', title: '所属医院', width: 100, align: 'center'},
+        {field: 'tdeclarant', title: '申报人', width: 100, align: 'center'},
+        {field: 'declarantphone', title: '申报人电话', width: 100, align: 'center'},
+        {
+            field: 'tstatus',
+            title: '故障状态',
+            width: 100,
+            align: 'center',
+            formatter: function (value, row, index) {
+                if (row.tstatus) {
+                    return '已备案';
+                } else {
+                    return '修复中';
+                }
+            }
+
+        },
+        {field: 'tdeclaretime', title: '故障时间', width: 100, align: 'center'},
+        {field: 'bid', title: '床位号', width: 100, align: 'center'},
+        {
+            field: 'isdeclare',
+            title: '是否申报',
+            width: 100,
+            align: 'center',
+            formatter: function (value, row, index) {
+                if (row.isdeclare) {
+                    return '已申报';
+                } else {
+                    return '未申报';
+                }
+            }
+        },
+        {
+            field: 'isdelete',
+            title: '是否删除',
+            width: 100,
+            align: 'center',
+            formatter: function (value, row, index) {
+
+                if (row.isdelete) {
+                    return '已删除';
+                } else {
+                    return '正常';
+                }
+            }
+        },
+        {
+            field: 'operate',
+            title: 'operate',
+            width: 150,
+            align: 'center',
+            formatter: function (value, row, index) {
+                if (!row.isdelete) {
+
+                    var btns = "<a id=\"btn\" href=\"javascript:deleteById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+                    btns += "<a id=\"btn2\" href=\"javascript:updateById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
+                    btns += "<a id=\"btn3\" href=\"javascript:detail(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-tip'\">查看详情</a>";
+                    return btns;
+                } else {
+                    var btns = "<a id=\"btn\" href=\"javascript:revokeById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-undo'\">恢复</a>";
+                    btns += "<a id=\"btn2\" href=\"javascript:updateById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
+                    btns += "<a id=\"btn3\" href=\"javascript:detail(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-tip'\">查看详情</a>";
+                    return btns;
+                }
+
+            }
+        }
+
+    ]];
     $(function () {
+        if (searchFlag === '') {
+            $('#dg').datagrid({
+                url: 'findAll',
+                fitColumns: true,
+                striped: true,
+                pagination: true,
+                title: '故障管理',
+                toolbar: '#tb',
+                columns: columns,
+                onLoadSuccess: function (index, field, value) {
+                    $('.easyui-linkbutton').linkbutton({});
+                }
+            });
+        }
+
+    });
+
+    function ss() {
+        searchFlag = '111';
+        var data = $("#selectForm").serialize();
+        alert(data)
         $('#dg').datagrid({
-            url: 'findAll',
+
+            url: 'search?'+data,
             fitColumns: true,
             striped: true,
             pagination: true,
             title: '故障管理',
             toolbar: '#tb',
-            columns: [[
-                {field: 'tid', title: '故障号', width: 100},
-                {field: 'ttitle', title: '故障标题', width: 100},
-                {field: 'tdescribe', title: '故障描述', width: 100, align: 'center'},
-                {field: 'ttype', title: '故障类型', width: 100, align: 'center'},
-                {field: 'hospital', title: '所属医院', width: 100, align: 'center'},
-                {field: 'tdeclarant', title: '申报人', width: 100, align: 'center'},
-                {field: 'declarantphone', title: '申报人电话', width: 100, align: 'center'},
-                {
-                    field: 'tstatus',
-                    title: '故障状态',
-                    width: 100,
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        if (row.tstatus) {
-                            return '已备案';
-                        } else {
-                            return '修复中';
-                        }
-                    }
-
-                },
-                {field: 'tdeclaretime', title: '故障时间', width: 100, align: 'center'},
-                {field: 'bid', title: '床位号', width: 100, align: 'center'},
-                {
-                    field: 'isdeclare',
-                    title: '是否申报',
-                    width: 100,
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        if (row.isdeclare) {
-                            return '已申报';
-                        } else {
-                            return '未申报';
-                        }
-                    }
-                },
-                {
-                    field: 'isdelete',
-                    title: '是否删除',
-                    width: 100,
-                    align: 'center',
-                    formatter: function (value, row, index) {
-
-                        if (row.isdelete) {
-                            return '已删除';
-                        } else {
-                            return '正常';
-                        }
-                    }
-                },
-                {
-                    field: 'operate',
-                    title: 'operate',
-                    width: 100,
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        if (!row.isdelete) {
-
-                            var btns = "<a id=\"btn\" href=\"javascript:deleteById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-                            btns += "<a id=\"btn2\" href=\"javascript:updateById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
-                            return btns;
-                        } else {
-                            var btns = "<a id=\"btn\" href=\"javascript:revokeById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-undo'\">恢复</a>";
-                            btns += "<a id=\"btn2\" href=\"javascript:updateById(" + row.tid + ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
-                            return btns;
-                        }
-
-                    }
-                }
-
-            ]],
+            columns: columns,
             onLoadSuccess: function (index, field, value) {
                 $('.easyui-linkbutton').linkbutton({});
             }
         });
-
-    })
+    }
+    function changedata() {
+        ss();
+    }
 
     function deleteById(tid) {
         $.messager.confirm('Confirm', '真的要删除吗?', function (r) {
@@ -203,6 +247,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     var url = '';
 
+    //就是数据回显
     function dosth(tid) {
         if (formflag === 'update') {
             $.post("findByTid", {tid: tid}, function (data) {
@@ -255,9 +300,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     }
 
+    function detail(tid) {
+        $("#tidform input").val(tid);
+        $("#tidform button").click();
+    }
+
 
 </script>
 <script>
+    //使用vue进行数据填充
+    //填充床位信息
     window.onload = function () {
         var vm = new Vue({
             el: '#app',
@@ -284,6 +336,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             }
         });
+        //填充医院信息
         var vm2 = new Vue({
             el: '#app2',
             data: {
