@@ -87,10 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <BODY>
 <TABLE border=0 height=600px align=left>
 	<TR>
-		<TD width=260px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
-			<ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
+		<TD width=10% align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+			<ul id="tree" class="ztree" style="width:100%; overflow:auto;"></ul>
 		</TD>
-		<TD width=1770px align=left valign=top><IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px SRC="core/standardData.html"></IFRAME></TD>
+		<TD width=1800px align=left valign=top><IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px SRC="core/standardData.html"></IFRAME></TD>
 	</TR>
 </TABLE>
 	
