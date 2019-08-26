@@ -7,20 +7,30 @@
 <head>
 <meta charset="utf-8">
 <title>用户管理</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
+
+	<%@ include file="/../include/usericon.jsp" %>
+	
 		<h4>用户管理/用户</h4>
+		<br>
 		<form method="post" action="findAll">
 			手机号<INPUT TYPE="text" NAME="phone" value="${customer.phone }">
-			性别<INPUT TYPE="text" NAME="sex" value="${customer.sex }"><br>
-			<input type="submit" value="Query">
+			性别<INPUT TYPE="text" NAME="sex" value="${customer.sex }">
+			注册日期<INPUT TYPE="date" NAME="time1" value='<f:formatDate value="${customer.time1}"
+								pattern="yyyy-MM-dd"/>'/>
+			至<INPUT TYPE="date" NAME="time2" value='<f:formatDate value="${customer.time2}"
+								pattern="yyyy-MM-dd"/>'/>
+			<input type="submit" value="Query" class="btn btn-success">
 		</form>
-			注册日期<INPUT TYPE="date"  NAME="regtime" value="${customer.regtime }">
-			至<INPUT TYPE="date" pattern="yy-MM-dd" name="etime"  value="${customer.regtime }">
 			<br><br><hr>
-			<button>导出报表</button> &nbsp;&nbsp;&nbsp;&nbsp; 用户总数：${count}
-			<TABLE border="1px" width="100%">
-				<TR>
+			
+			<button class="btn btn-success">导出报表</button> 
+			<span >用户总数：</span>${count}
+			<TABLE class="table table-bordered table-hover table-striped">
+				<TR class="success">
 					<TD>手机号</TD>
 					<TD>昵称</TD>
 					<TD>性别</TD>
@@ -51,6 +61,19 @@
 						</TD>
 					</TR>
 				</c:forEach>
+				<tr>
+					<td colspan="9">
+						<ul class="pagination">
+						    <li><a href="#">&laquo;</a></li>
+						    <li class="active"><a href="#">1</a></li>
+						    <li class="disabled"><a href="#">2</a></li>
+						    <li><a href="#">3</a></li>
+						    <li><a href="#">4</a></li>
+						    <li><a href="#">5</a></li>
+						    <li><a href="#">&raquo;</a></li>
+						</ul>
+					</td>
+				</tr>
 			</TABLE>
 </body>
 </html>

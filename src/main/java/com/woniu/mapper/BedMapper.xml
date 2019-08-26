@@ -23,6 +23,19 @@
   	SELECT * from bed b WHERE EXISTS (
 		SELECT o.bid from orders o where o.oid=#{oid} AND b.bid=o.bid)
   </select>
+  
+  <!--   下面的方法时根据医院找床位的id -->
+	<select id="selectByHid" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
+		SELECT bid FROM bed where fkid in(
+		SELECT ha.fk_id FROM hospitaladministrative ha WHERE ha.hid=#{hid})
+	</select>
+<!--   下面的方法时根据医院和科室的id找床位的id -->
+	<select id="selectByHandA" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
+	SELECT b.bid FROM bed b,hospitaladministrative ha where ha.hid=#{hid} AND ha.aid=#{aid} and b.fkid=ha.fk_id
+	</select>
+
+
+>>>>>>> branch 'master' of ssh://git@github.com/sdiq0707/jiapeisharebed.git
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbggenerated

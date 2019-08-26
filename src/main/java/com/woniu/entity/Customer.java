@@ -16,6 +16,25 @@ public class Customer implements Serializable{
 				+ isdelete + "]";
 	}
 
+	private Date time1;
+	
+	public Date getTime1() {
+		return time1;
+	}
+
+	public void setTime1(Date time1) {
+		this.time1 = time1;
+	}
+	private Date time2;
+	
+	public Date getTime2() {
+		return time2;
+	}
+
+	public void setTime2(Date time2) {
+		this.time2 = time2;
+	}
+
 	private List<Orders> orders;
 	
 	public List<Orders> getOrders() {

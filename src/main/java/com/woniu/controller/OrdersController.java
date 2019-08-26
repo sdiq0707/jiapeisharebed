@@ -35,8 +35,10 @@ public class OrdersController {
 	public String findAll(ModelMap map ,OrderSelect orderSelect) {
 
 		List<Orders> list = ordersServiceImpl.findAll(orderSelect);
+		Integer count = list.size();
 		System.out.println(orderSelect.toString());
-		map.put("list", list);		
+		map.put("list", list);	
+		map.put("count", count);
 		return "admin/orders/list";
 	}
 	@RequestMapping("findById")
@@ -58,6 +60,8 @@ public class OrdersController {
 		map.put("minutes", minutes);
 		return "admin/orders/details";
 	}
+	
+	//查找医院回填下拉框，返回类型为josn类型
 	@ResponseBody
 	@RequestMapping("findAllhospital")
 	public String findAllhospital() throws JsonProcessingException {
@@ -67,5 +71,15 @@ public class OrdersController {
 		String string = objectMapper.writeValueAsString(list);
 		System.out.println(string);
 		return string;
+	}
+	@RequestMapping("delete")
+	public String deleteByID(Integer oid) {
+		ordersServiceImpl.deleteByID(oid);
+		return "redirect:findAll";
+	}
+	@RequestMapping("revoke")
+	public String revokeByID(Integer oid) {
+		ordersServiceImpl.revokeByID(oid);
+		return "redirect:findAll";
 	}
 }
