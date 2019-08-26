@@ -1,29 +1,14 @@
 package com.woniu.entity;
 
 public class PageBean {
+
+
 	private Integer offset;//从哪里开始
-	private Integer limit=10;//取几行数据
+	private Integer limit=10;//取几条数据
 	private Integer pageNow=1;//当前页
 	private Integer count;//总记录数
 	private Integer pageCount;//总页数
-	//为了向EasyUI兼容
-	private Integer page=1;
-	public Integer getPage() {
-		return page;
-	}
-	public void setPage(Integer page) {
-		this.page = page;
-		this.pageNow=page;
-	}
-	private Integer rows=10;
 	
-	public Integer getRows() {
-		return rows;
-	}
-	public void setRows(Integer rows) {
-		this.rows = rows;
-		this.limit=rows;
-	}
 	public Integer getOffset() {
 		return (pageNow-1)*limit;
 	}
@@ -54,7 +39,4 @@ public class PageBean {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	
-	
-	
 }
