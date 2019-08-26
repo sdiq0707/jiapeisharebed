@@ -8,10 +8,17 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Hospital;
+import com.woniu.entity.HospitalExample;
+import com.woniu.entity.HospitalExample.Criteria;
+import com.woniu.entity.Hospitalmanger;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Province;
+import com.woniu.entity.Userinfo;
+import com.woniu.entity.UserinfoExample;
 import com.woniu.mapper.HospitalMapper;
+import com.woniu.mapper.HospitalmangerMapper;
 import com.woniu.mapper.ProvinceMapper;
+import com.woniu.mapper.UserinfoMapper;
 import com.woniu.service.IHospitalService;
 
 @Service
@@ -19,6 +26,8 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	@Resource
 	private HospitalMapper hospitalMapper;
+	@Resource
+	private UserinfoMapper userinfoMapper;
 	
 	@Override
 	public void save(Hospital hospital) {
@@ -62,6 +71,38 @@ public class HospitalServiceImpl implements IHospitalService{
 		
 	}
 
+	@Override
+	public List<Userinfo> findHospitalManager(Integer pid) {
+		// TODO Auto-generated method stub
+		UserinfoExample ue=new UserinfoExample();
+		com.woniu.entity.UserinfoExample.Criteria criteria = ue.createCriteria();
+		if(pid!=null) {
+			criteria.andPidEqualTo(pid);
+			List<Userinfo> list=userinfoMapper.selectByExample(ue);
+			return list;
+		}else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public List<Hospital> findByName(PageBean pageBean,String hname) {
+		// TODO Auto-generated method stub
+		HospitalExample he=new HospitalExample();
+		Criteria criteria = he.createCriteria();
+		if(hname!=null&&hname!="") {
+			criteria.andHnameEqualTo(hname);
+			List<Hospital> list = hospitalMapper.selectByExample(he,new RowBounds(pageBean.getOffset(),pageBean.getLimit()));
+			int count=hospitalMapper.countByExample(he);
+			pageBean.setCount(count);
+			return list;
+		}else {
+			
+			return null;
+		}
+	}
+	
 	
 
 }

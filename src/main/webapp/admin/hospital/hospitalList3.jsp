@@ -46,7 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						return '正常';
 					}
 				}
-			        },  
+			        }, 
+			    {field:'hresper',title:'医院对接人',width:100,align:'center'},    
 		        {field:'operate',title:'operate',width:100,align:'center',formatter: function(value,row,index){
 		        	if (!row.isdelete){
 			        	var btns="<a id=\"btn\" href=\"javascript:deleteById("+row.hid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
@@ -138,73 +139,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('#ff').form('load',json);	// 从URL加载
 			});
 	}
-	function search(value){
-		$(function(){
-			$('#dg').datagrid({   
-			    url:'findByName',
-			    fitColumns:true,
-			    striped:true,
-			    pageSize:20,
-			    height:500,
-			    pagination:true,
-			    title:'医院管理',
-			    toolbar: '#tb',
-			    queryParams: {
-					hname: value
-				},
-			    columns:[[   
-			        {field:'hid',title:'hid',width:100},   
-			        {field:'hname',title:'hname',width:100},   
-			        {field:'province',title:'province',width:100,align:'center'},   
-			        {field:'city',title:'city',width:100,align:'center'},   
-			        {field:'zone',title:'zone',width:100,align:'center'},   
-			        {field:'country',title:'country',width:100,align:'center'},   
-			        {field:'rent',title:'rent',width:100,align:'center'},   
-			        {field:'account',title:'account',width:100,align:'center'},   
-			        {field:'isdelete',title:'isdelete',width:100,align:'center',formatter: function(value,row,index){
-						if (row.isdelete){
-							return '已删除';
-						} else {
-							return '正常';
-						}
-					}
-				        },  
-			        {field:'operate',title:'operate',width:100,align:'center',formatter: function(value,row,index){
-			        	if (!row.isdelete){
-				        	var btns="<a id=\"btn\" href=\"javascript:deleteById("+row.hid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-								btns+="<a id=\"btn\" href=\"javascript:findById("+row.hid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
-			        		return btns;
-						} else {
-							var btns="<a id=\"btn\" href=\"javascript:revokeById("+row.hid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-undo'\">恢复</a>";
-								btns+="<a id=\"btn\" href=\"javascript:findById("+row.hid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
-							return btns;
-						}
-						
-					}
-				        }
-				    
-			    ]],
-			    onLoadSuccess: function(index,field,value){
-					$('.easyui-linkbutton').linkbutton({   
-					});  
-				}     
-			});
-			
-		})
-	}
-	
+	 $('#ss').searchbox({   
+		    searcher:function(value,name){   
+		        alert(value + "," + name)   
+		    },   
+		    menu:'#mm',   
+		    prompt:'Please Input Value'  
+		});  
 </script>
+<script>
+	$.ajaxSetup({
+			global:true,
+			type:"POST",
+			async:false,
+			cache:false
+		});
+	var hm;
+	$(function(){
+			$.ajax({
+					url:"findHospitalManager",
+					dataType:"json",
+					success:function(msg){
+							hm=msg;
+							alert(hm);
+						}
+				});
+		});
+	</script>
 </head>
-<input id="ss"></input>  
-<div id="mm" style="width:120px">  
-    <div data-options="name:'hospital',iconCls:'icon-ok'">医院</div>  
-    <div data-options="name:'administrative'">科室</div>  
-</div> 
 <body>
 <table id="dg"></table>
-
-
-
 
 <div id="tb">
 	<a href="javascript:openForm()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">增加</a>
@@ -227,14 +191,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		所属地区：<SELECT id="z" NAME="zone">
 				<option v-for="z in zones">{{z.zname}}</option>
 				</SELECT>
+				
 		</div>
 		所属县：<input type="text" name="country" /><br/>
+		医院对接人：<SELECT id="" NAME="">
+						<option></option>
+				</SELECT><br/>
 		医院租金：<input type="text" name="rent" /><br/>
 		医院账户：<input type="text" name="account" /><br/>
 		软删除：<input type="text" name=isdelete /><br/>
 <button type="button" onclick="dosave()">save</button><br/>
 </form>
-</div>  
 </body>
 </html>
 <script>
@@ -275,13 +242,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        }
 	    });
 	}
-	 $('#ss').searchbox({   
-		    searcher:function(value,name){ 
-			    alert(name);
-			    search(value);   
-		    },   
-		    menu:'#mm',   
-		    prompt:'Please Input Value'  
-		});  
 </script>
-

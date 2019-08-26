@@ -5,8 +5,18 @@ import java.util.List;
 public class Hospital {
 	
 	private List administrative;
+	private Hospitalmanger hospitalManger;
 	
-    public List getAdministrative() {
+	
+    public Hospitalmanger getHospitalManger() {
+		return hospitalManger;
+	}
+
+	public void setHospitalManger(Hospitalmanger hospitalManger) {
+		this.hospitalManger = hospitalManger;
+	}
+
+	public List getAdministrative() {
 		return administrative;
 	}
 
