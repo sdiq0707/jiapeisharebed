@@ -8,6 +8,25 @@ public class PageBean {
 	private Integer pageNow=1;//当前页
 	private Integer count;//总记录数
 	private Integer pageCount;//总页数
+	//用来支持easyui分页
+	private Integer page;
+	private Integer rows;
+	
+	
+	
+	public final Integer getPage() {
+		return pageNow;
+	}
+	public final void setPage(Integer page) {
+		this.pageNow = page;
+	}
+	public final Integer getRows() {
+		return limit;
+	}
+	public final void setRows(Integer rows) {
+		this.limit = rows;
+	}
+	
 	
 	public Integer getOffset() {
 		return (pageNow-1)*limit;

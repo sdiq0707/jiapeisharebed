@@ -35,7 +35,7 @@ public class PageInterceptor implements Interceptor{
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		// TODO Auto-generated method stub
-		//System.out.println("准备开始搞SQL与");
+		System.out.println("准备开始搞SQL语句");
 		//取得当前MyBatis执行环境中是否有RowBounds
 		//1:有rowBounds进行分页
 		//2没有rowBounds进行放行
