@@ -35,6 +35,7 @@ public class OrdersController {
 	public String findAll(ModelMap map ,OrderSelect orderSelect) {
 
 		List<Orders> list = ordersServiceImpl.findAll(orderSelect);
+		
 		Integer count = list.size();
 		System.out.println(orderSelect.toString());
 		map.put("list", list);	

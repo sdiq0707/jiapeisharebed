@@ -66,7 +66,7 @@ public class OrdersServiceImpl implements IOrdersService {
 			etime = new Date();
 		}else {
 			try {
-				etime = sdf.parse(orderSelect.getBtime());
+				etime = sdf.parse(orderSelect.getEtime());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
