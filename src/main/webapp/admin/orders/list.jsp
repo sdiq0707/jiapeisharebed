@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 	<script>
 	$.ajaxSetup({
 			global:true,
@@ -52,6 +54,7 @@
 </script>
 </head>
 <body>
+<div>
 	<form action="/admin/orders/findAll" method="post">
 		
 		
@@ -88,7 +91,7 @@
 	<div>
 		<h4>共${count }条记录</h4>
 	</div>
-	<div>
+	
 		<table id="table-1" class="table table-sm" style=" text-align: center;">
 			<thead>
 				<tr>
