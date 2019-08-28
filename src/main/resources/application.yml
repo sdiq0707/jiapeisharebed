@@ -18,3 +18,12 @@ logging:
       woniu: 
         mapper: DEBUG
 
+#配置上传文件的最大值
+servlet:
+  multipart:
+    max-file-size: 5Mb
+    max-request-size: 50Mb
+#自定义文件上传路径
+web:
+  upload-path: /upload    
+    

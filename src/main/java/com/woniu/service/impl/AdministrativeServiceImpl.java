@@ -68,7 +68,8 @@ public class AdministrativeServiceImpl implements IAdministrativeService {
 		Hospitaladministrative key=new Hospitaladministrative();
 		key.setAid(administrative.getAid());
 		key.setHid(hid);
-		key.setFkId(hid+"X"+administrative.getAid());
+		System.out.println(hid+"======================!");
+		key.setFkId(administrative.getAid()+"X"+hid);
 		hospitaladministrativeMapper.insertSelective(key);
 	}
 

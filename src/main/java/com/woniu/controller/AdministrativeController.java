@@ -28,12 +28,6 @@ public class AdministrativeController {
 	@Resource
 	private IHospitalService hospitalServiceImpl;
 	
-//	@RequestMapping("findAll")
-//	public String findAll(ModelMap map,PageBean pageBean){
-//		List<Administrative> list = administrativeServiceImpl.findAll(pageBean);
-//		map.put("list", list);
-//		return "/admin/administrative/list";
-//	}
 	@RequestMapping("findJSON")
 	public @ResponseBody Map findJSON(Administrative administrative,PageBean pageBean){
 		Map map=new HashMap();
@@ -69,27 +63,28 @@ public class AdministrativeController {
 	
 	@RequestMapping("findById")
 	public @ResponseBody Map findById(Integer aid) {
-		System.out.println(aid+"=================");
 		Map map=new HashMap();
 		Administrative administrative=administrativeServiceImpl.findOne(aid);
 		map.put("administrative", administrative);
+		List<Hospital> hospitals = hospitalServiceImpl.findAll();
+		map.put("hospitals", hospitals);
 		return map;
 	}
 	@RequestMapping("update")
 	public String update(Administrative administrative,Integer hid) {
 		administrativeServiceImpl.update(administrative,hid);
-		return "redirect:findAll";
+		return "/admin/administrative/list2";
 	}
 	
 	@RequestMapping("delete")
 	public String delete(Integer aid) {
 		administrativeServiceImpl.delete(aid);
-		return "redirect:findAll";
+		return "/admin/administrative/list2";
 	}
 	@RequestMapping("revoke")
 	public String revoke(Integer aid) {
 		administrativeServiceImpl.revoke(aid);
-		return "redirect:findAll";
+		return "/admin/administrative/list2";
 	}
 	
 	@RequestMapping("save")

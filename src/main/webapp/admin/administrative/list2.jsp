@@ -36,10 +36,11 @@ $(document).ready(function(){
 <div id="app">	
 		<table class="table table-bordered table-hover table-striped" >
 				<tr class="text-center">
-					<td>aid</td>
-					<td>aname</td>
-					<td>isdelete</td>
-					<td>operation</td>
+					<td>科室编号</td>
+					<td>科室名称</td>
+<!-- 					<td>所属医院</td> -->
+					<td>软删除</td>
+					<td>操作</td>
 				</tr>
 			
 				<tr v-for="administrative in json.list" class="text-center">
@@ -48,7 +49,8 @@ $(document).ready(function(){
 					<td>{{administrative.isdelete==1?'正常':'已删除'}}</td>
 					<td>
 						<button class="btn btn-success" @click="findById(administrative.aid)">编辑</button>
-						<button class="btn btn-danger">{{administrative.isdelete==1?'删除':'恢复'}}</button>
+						<button class="btn btn-info" v-if="administrative.isdelete==1" @click="delete1(administrative.aid)">删除</button>
+						<button class="btn btn-danger" v-if="administrative.isdelete==0" @click="revoke(administrative.aid)">恢复</button>
 					</td>
 				</tr>
 		</table>
@@ -69,6 +71,12 @@ $(document).ready(function(){
 </body>
 </html>
 <script >
+$.ajaxSetup({
+	global:true,
+	type:"POST",
+	async:false,//表示同步
+	cache:false
+});
 window.onload = function(){
 		var vm = new Vue({
 			el:'#app',
@@ -126,6 +134,12 @@ window.onload = function(){
 				},
 				findById:function(aid){
 					window.location.href ="<%=basePath%>admin/administrative/update.jsp?aid="+aid;
+				},
+				delete1:function(aid){
+					window.location.href ="<%=basePath%>admin/administrative/delete?aid="+aid;
+				},
+				revoke:function(aid){
+					window.location.href ="<%=basePath%>admin/administrative/revoke?aid="+aid;
 				}
 			}
 		});
