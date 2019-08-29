@@ -15,19 +15,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<h5>用户反馈信息展示</h5>
-	<form action="" method="post">
-		time:<input type="date" name="time1"/>至<input type="date" name="time1"/>
+	<form action="searchByTime" method="post">
+		<font color="red" size="5">time:</font><input type="date" name="btime"/>至<input type="date" name="etime"/>
 		<button type="submit">搜索</button><button type="reset">取消</button>
 	</form>
 	<table class="table table-bordered table-hover table-striped" >
 		<tr class="text-center">
-			<td>fid</td>
-			<td>content</td>
-			<td>photo</td>
-			<td>phone</td>
-			<td>time</td>
-			<td>isdelete</td>
-			<td>operation</td>
+			<td>编号</td>
+			<td>反馈内容</td>
+			<td>上传照片</td>
+			<td>提交人手机号</td>
+			<td>提交时间</td>
+			<td>软删除</td>
+			<td>操作</td>
 		</tr>
 		<c:forEach items="${list }" var="feedback">
 			<tr class="text-center">
@@ -48,5 +48,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</c:forEach>
 	</table>
 	<button class="btn btn-success" onclick="location.href='save.jsp'">增加</button>
+	<button class="btn btn-info" onclick="location.href='findAll'" type="submit">返回</button>
 </body>
 </html>

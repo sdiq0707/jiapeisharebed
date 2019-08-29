@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.woniu.entity.Feedback;
+import com.woniu.entity.OrderSelect;
 import com.woniu.service.IFeedbackService;
 
 @Controller
@@ -63,7 +64,7 @@ public class FeedbackController {
 		feedbackServiceImpl.save(fb);//调用后台方法，将对象存进数据库
 		System.out.println("ok");
 		return "redirect:findAll";//执行完毕，返回一个逻辑视图
-	}
+	} 
 	
 	@RequestMapping("delete")
 	public String delete(Integer fid) {
@@ -74,5 +75,12 @@ public class FeedbackController {
 	public String revoke(Integer fid) {
 		feedbackServiceImpl.revoke(fid);
 		return "redirect:findAll";
+	}
+	
+	@RequestMapping("searchByTime")
+	public String searchByTime(OrderSelect orderSelect,ModelMap map) {
+		List list = feedbackServiceImpl.findByCondition(orderSelect);
+		map.put("list", list);
+		return "/admin/feedback/list";
 	}
 }

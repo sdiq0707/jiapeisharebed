@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Feedback;
 import com.woniu.entity.FeedbackExample;
+import com.woniu.entity.FeedbackExample.Criteria;
+import com.woniu.entity.OrderSelect;
 import com.woniu.mapper.FeedbackMapper;
 import com.woniu.service.IFeedbackService;
 
@@ -21,7 +23,6 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	
 	@Override
 	public List findAll() {
-		// TODO Auto-generated method stub
 		return feedbackMapper.selectByExample(null);
 	}
 
@@ -44,5 +45,39 @@ public class FeedbackServiceImpl implements IFeedbackService {
 		fb.setFid(fid);
 		fb.setIsdelete(1);
 		feedbackMapper.updateByPrimaryKeySelective(fb);
+	}
+
+
+	@Override
+	public List findByCondition(OrderSelect orderSelect) {
+		System.out.println("111111111");
+		//定义开始和结束的时间字段
+			Date btime=null;
+			Date etime=null;
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			FeedbackExample example=new FeedbackExample();
+			Criteria criteria=example.createCriteria();
+			//根据开始和结束的时间查找
+			if(orderSelect.getBtime()!=null&&!orderSelect.getBtime().equals("")) {
+				try {
+					btime=sdf.parse(orderSelect.getBtime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(orderSelect.getEtime()!=null&&!orderSelect.getEtime().equals("")) {
+				try {
+					etime=sdf.parse(orderSelect.getEtime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			System.out.println(orderSelect.getBtime()+"=====");
+			System.out.println(orderSelect.getEtime());	
+		criteria.andTimeBetween(btime, etime);
+		return feedbackMapper.selectByExample(example);
 	}
 }
