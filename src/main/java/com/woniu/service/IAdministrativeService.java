@@ -14,4 +14,6 @@ public interface IAdministrativeService {
 	public Administrative findOne(Integer aid);
 	public List<Administrative> findByAname(Administrative administrative,String aname);
 	public List<Administrative> findAll(Administrative administrative,PageBean pagebean);
+
+	
 }

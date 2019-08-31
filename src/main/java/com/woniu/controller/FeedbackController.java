@@ -70,7 +70,7 @@ public class FeedbackController {
 	public String delete(Integer fid) {
 		feedbackServiceImpl.delete(fid);
 		return "redirect:findAll";
-	}
+	}  
 	@RequestMapping("revoke")
 	public String revoke(Integer fid) {
 		feedbackServiceImpl.revoke(fid);

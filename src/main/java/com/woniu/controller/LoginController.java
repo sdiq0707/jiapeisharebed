@@ -21,6 +21,8 @@ public class LoginController {
 	private ITreeService treeService;
 	@RequestMapping("/login")
 	public String login(Userinfo info,HttpSession session) throws JsonProcessingException {
+		System.out.println(info.getUname()+"!!!!");
+		System.out.println(info.getUpass());
 		info = userinfoService.login(info);
 		if(info == null) {
 			return "index";

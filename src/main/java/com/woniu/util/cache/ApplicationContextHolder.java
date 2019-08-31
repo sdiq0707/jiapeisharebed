@@ -13,7 +13,6 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 	//spring容器会自动调用该方法，传入ApplicationContext对象
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		atx=applicationContext;
-		
 	}
 	public static ApplicationContext getApplicationContext() {
 		return atx;
